@@ -1,0 +1,41 @@
+/* 
+ * DAdolfans  By Losses Don
+ * You can use the code under CC BY-SA 3.0. * 
+ */
+/* 
+    Created on : Jul 8, 2014, 7:01:06 PM
+    Author     : Losses
+*/
+/* line 13, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\0000313}}
+* {
+  margin: 0;
+  padding: 0;
+}
+/* line 18, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\0000318}}
+header {
+  width: 100%;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  z-index: 2;
+}
+/* line 27, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\0000327}}
+#main_area {
+  width: -webkit-calc(100% - ( 20px * 2));
+  height: -webkit-calc(100% - 70px );
+  border: 0;
+  padding: 70px 20px 0 20px;
+  font: 15px/30px "microsoft yahei";
+  position: absolute;
+  z-index: 1;
+  resize: none;
+}
+/* line 38, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\0000338}}
+#menu {
+  display: none;
+}

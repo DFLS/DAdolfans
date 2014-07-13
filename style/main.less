@@ -1,0 +1,40 @@
+/* 
+ * DAdolfans  By Losses Don
+ * You can use the code under CC BY-SA 3.0. * 
+ */
+/* 
+    Created on : Jul 8, 2014, 7:01:06 PM
+    Author     : Losses
+*/
+
+@editor-left-right:20px;
+@editor-top:70px;
+
+*{
+    margin:0;
+    padding:0;
+}
+
+header{
+    width:100%;
+    height:50px;
+    background:rgba(255,255,255,0.8);
+    box-shadow:0 3px 3px rgba(0,0,0,0.2);
+    position:fixed;
+    z-index:2;
+}
+
+#main_area{
+    width:~"-webkit-calc(100% - (" @editor-left-right ~"* 2))";
+    height:~"-webkit-calc(100% -" @editor-top~")";
+    border:0;
+    padding:@editor-top @editor-left-right 0 @editor-left-right;
+    font:15px/30px "microsoft yahei";
+    position:absolute;
+    z-index:1;
+    resize: none;
+}
+
+#menu{
+    display:none;
+}
