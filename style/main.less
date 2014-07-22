@@ -7,12 +7,27 @@
     Author     : Losses
 */
 
-@editor-left-right:20px;
 @editor-top:70px;
+
+@menu-width:165px;
+@icon-size:34px;
 
 *{
     margin:0;
     padding:0;
+    outline:none;
+}
+
+body{
+    position:realtive;
+}
+
+ul{
+    list-style: none;
+}
+
+li button {
+    border:0;
 }
 
 header{
@@ -21,20 +36,129 @@ header{
     background:rgba(255,255,255,0.8);
     box-shadow:0 3px 3px rgba(0,0,0,0.2);
     position:fixed;
-    z-index:2;
+    z-index:3;
 }
 
 #main_area{
-    width:~"-webkit-calc(100% - (" @editor-left-right ~"* 2))";
+    left:50%;
+    width:40em;
     height:~"-webkit-calc(100% -" @editor-top~")";
     border:0;
-    padding:@editor-top @editor-left-right 0 @editor-left-right;
+    padding:@editor-top 0 0 0;
+    margin-left:-20em;
     font:15px/30px "microsoft yahei";
     position:absolute;
     z-index:1;
     resize: none;
 }
 
-#menu{
+.menu{
+    background:rgba(255,255,255,0.95);
+    border:1px solid #bebebe;
+    border-radius:1px;
+    box-shadow:0 0 6px #d1d1d1;
+    font:13px/30px "microsoft yahei";
+    padding:5px;
+    position:fixed;
+    display:none;
+    cursor:default;
+    -webkit-user-select:none;
+    z-index:3;
+    .icon{
+        width:@icon-size;
+        height:@icon-size;
+        margin:3px;
+    }
+    .icon:hover{
+        -webkit-filter:brightness(25%);
+    }
+    .line{
+        width:168px;
+        height:1px;
+        border-top:1px solid #c1c1c1;
+        margin:0 2px;
+        clear:both;
+        display:block;
+    }
+    li,a{
+        float:left;
+    }
+}
+
+#menu_main{
+    display:none;
+}
+
+#menu_content{
+    width:172px;
+    #menu_function{
+        #copy{ 
+            background:url(../image/copy.png);
+        } 
+        #cut{ 
+            background:url(../image/cut.png);
+        } 
+        #paste{
+            background:url(../image/paste.png);
+        } 
+        #pasteApt{ 
+            background:url(../image/pasteapt.png);
+        } 
+    }
+
+    #menu_format{
+        #bold{
+            background:url(../image/bold.png);
+        } 
+        #italic{ 
+            background:url(../image/italic.png);
+        } 
+        #code{ 
+            background:url(../image/code.png);
+        } 
+        #link{ 
+            background:url(../image/link.png);
+        } 
+        #list_style{
+            #list_style_heading{
+                margin:0 0 0 20px;
+                width:112px;
+                line-height:35px;
+                float:left;
+                display:block;
+            }
+            #heading_list{
+                height:0;
+            }
+            #follow{
+                background:url(../image/following.png);
+                float:right;
+                display:block;
+            }
+            ul{
+                .list{
+                    height:0;
+                    width:100%;
+                    margin:0 25px;
+                    overflow:hidden;
+                    float:none;
+                    display:block;
+                }
+            }
+        }
+        #list_list{
+            margin:0 0 0 10px;
+            line-height:40px;
+            display:block;
+            li{
+                width:70px;
+                margin:0 5px;
+            }
+        }
+    }
+}
+
+
+#open_dialog,#paste_bin{
     display:none;
 }

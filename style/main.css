@@ -6,36 +6,192 @@
     Created on : Jul 8, 2014, 7:01:06 PM
     Author     : Losses
 */
-/* line 13, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
-@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\0000313}}
+/* line 15, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\0000315}}
 * {
   margin: 0;
   padding: 0;
+  outline: none;
 }
-/* line 18, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
-@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\0000318}}
+/* line 21, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\0000321}}
+body {
+  position: realtive;
+}
+/* line 25, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\0000325}}
+ul {
+  list-style: none;
+}
+/* line 29, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\0000329}}
+li button {
+  border: 0;
+}
+/* line 33, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\0000333}}
 header {
   width: 100%;
   height: 50px;
   background: rgba(255, 255, 255, 0.8);
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
   position: fixed;
-  z-index: 2;
+  z-index: 3;
 }
-/* line 27, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
-@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\0000327}}
+/* line 42, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\0000342}}
 #main_area {
-  width: -webkit-calc(100% - ( 20px * 2));
+  left: 50%;
+  width: 40em;
   height: -webkit-calc(100% - 70px );
   border: 0;
-  padding: 70px 20px 0 20px;
+  padding: 70px 0 0 0;
+  margin-left: -20em;
   font: 15px/30px "microsoft yahei";
   position: absolute;
   z-index: 1;
   resize: none;
 }
-/* line 38, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
-@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\0000338}}
-#menu {
+/* line 55, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\0000355}}
+.menu {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #bebebe;
+  border-radius: 1px;
+  box-shadow: 0 0 6px #d1d1d1;
+  font: 13px/30px "microsoft yahei";
+  padding: 5px;
+  position: fixed;
+  display: none;
+  cursor: default;
+  -webkit-user-select: none;
+  z-index: 3;
+}
+/* line 67, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\0000367}}
+.menu .icon {
+  width: 34px;
+  height: 34px;
+  margin: 3px;
+}
+/* line 72, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\0000372}}
+.menu .icon:hover {
+  -webkit-filter: brightness(25%);
+}
+/* line 75, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\0000375}}
+.menu .line {
+  width: 168px;
+  height: 1px;
+  border-top: 1px solid #c1c1c1;
+  margin: 0 2px;
+  clear: both;
+  display: block;
+}
+/* line 83, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\0000383}}
+.menu li,
+.menu a {
+  float: left;
+}
+/* line 88, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\0000388}}
+#menu_main {
+  display: none;
+}
+/* line 92, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\0000392}}
+#menu_content {
+  width: 172px;
+}
+/* line 95, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\0000395}}
+#menu_content #menu_function #copy {
+  background: url(../image/copy.png);
+}
+/* line 98, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\0000398}}
+#menu_content #menu_function #cut {
+  background: url(../image/cut.png);
+}
+/* line 101, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\00003101}}
+#menu_content #menu_function #paste {
+  background: url(../image/paste.png);
+}
+/* line 104, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\00003104}}
+#menu_content #menu_function #pasteApt {
+  background: url(../image/pasteapt.png);
+}
+/* line 110, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\00003110}}
+#menu_content #menu_format #bold {
+  background: url(../image/bold.png);
+}
+/* line 113, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\00003113}}
+#menu_content #menu_format #italic {
+  background: url(../image/italic.png);
+}
+/* line 116, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\00003116}}
+#menu_content #menu_format #code {
+  background: url(../image/code.png);
+}
+/* line 119, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\00003119}}
+#menu_content #menu_format #link {
+  background: url(../image/link.png);
+}
+/* line 123, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\00003123}}
+#menu_content #menu_format #list_style #list_style_heading {
+  margin: 0 0 0 20px;
+  width: 112px;
+  line-height: 35px;
+  float: left;
+  display: block;
+}
+/* line 130, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\00003130}}
+#menu_content #menu_format #list_style #heading_list {
+  height: 0;
+}
+/* line 133, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\00003133}}
+#menu_content #menu_format #list_style #follow {
+  background: url(../image/following.png);
+  float: right;
+  display: block;
+}
+/* line 139, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\00003139}}
+#menu_content #menu_format #list_style ul .list {
+  height: 0;
+  width: 100%;
+  margin: 0 25px;
+  overflow: hidden;
+  float: none;
+  display: block;
+}
+/* line 149, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\00003149}}
+#menu_content #menu_format #list_list {
+  margin: 0 0 0 10px;
+  line-height: 40px;
+  display: block;
+}
+/* line 153, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\00003153}}
+#menu_content #menu_format #list_list li {
+  width: 70px;
+  margin: 0 5px;
+}
+/* line 162, F:\Production\DWRite\Dev\DWrite\public_html\style\main.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/F\:\/Production\/DWRite\/Dev\/DWrite\/public_html\/style\/main\.less}line{font-family:\00003162}}
+#open_dialog,
+#paste_bin {
   display: none;
 }

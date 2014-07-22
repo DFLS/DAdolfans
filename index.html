@@ -9,21 +9,64 @@ You can use the code under CC BY-SA 3.0.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="style/main.css" rel="stylesheet" type="text/css"/>
-        <script src="script/jquery-1.11.1.min.js" type="text/javascript"></script>
-        <script src="script/jquery.hotkeys.js" type="text/javascript"></script>
-        <script src="script/fs.js" type="text/javascript"></script>
-        <script src="script/regex.js" type="text/javascript"></script>
+        <script src="script/lib/jquery-1.11.1.min.js" type="text/javascript"></script>
+        <script src="script/lib/jquery.hotkeys.js" type="text/javascript"></script>
+        <script src="script/lib/jquery.insert_content.js" type="text/javascript"></script>
         <script src="script/normal.js" type="text/javascript"></script>
+        <script src="script/regex.js" type="text/javascript"></script>
+        <script src="script/fs.js" type="text/javascript"></script>
+        <script src="script/mouse.js" type="text/javascript"></script>
+        <script src="script/action.js" type="text/javascript"></script>
     </head>
     <body>
         <header>
             <img src="image/logo.png" alt="DAdolfans"/>
         </header>
-        <div id="menu">
+        <div id="menu_main">
             <ul>
                 <li>打开文件</li>
             </ul>
         </div>
-        <iframe id="main_area" name="mainArea"></iframe>
+        <div id="menu_content" class="menu">
+            <ul id="menu_function">
+                <li><button class="icon action" id="cut"></button></li>
+                <li><button class="icon action" id="copy"></button></li>
+                <li><button class="icon action" id="paste"></button></li>
+                <li><button class="icon action" id="pasteApt"></button></li>
+            </ul>
+            <div class="line"></div>
+            <ul id="menu_format">
+                <li class="style">
+                    <button class="icon format" id="bold"></button>
+                    <button class="icon format" id="italic"></button>
+                    <button class="icon format" id="code"></button>
+                    <button class="icon format" id="link"></button>
+                </li>
+                <li class="line"></li>
+                <li class="list" id="list_style">
+                    <a id="list_style_heading">Heading</a><a class="icon format" id="follow"></a>
+                    <a class="clear"></a>
+                    <ul id="heading_list">
+                        <li class="list format"><button id="h1">H1</button></li>
+                        <li class="list format"><button id="h2">H2</button></li>
+                        <li class="list format"><button id="h3">H3</button></li>
+                        <li class="list format"><button id="h4">H4</button></li>
+                        <li class="list format"><button id="h5">H5</button></li>
+                        <li class="list format"><button id="h6">H6</button></li>
+                    </ul>
+                </li>
+                <li class="line"></li>
+                <li class="style">
+                    <ul id="list_list">
+                        <li class="list format">● Adol</li>
+                        <li class="list format">1. Adol</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div id="main_area" contenteditable="true"></div>
+        <!--事件处理辅助元素，不要在意细节~-->
+        <input type="file" id="open_dialog"/>
+        <input type="file" id="save_dialog"/>
     </body>
 </html>
