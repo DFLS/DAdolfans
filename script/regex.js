@@ -18,8 +18,5 @@ var regex = {
         console.log(dataReg);
         //将文档内容回填至编辑框
         return dataReg;
-    },
-    format: function(action) {
-        document.execCommand(action, false, null);
     }
-}
+};

@@ -3,26 +3,92 @@
  * You can use the code under CC BY-SA 3.0. * 
  */
 
+////////////////////////////////////////////////////////////////////////////////
+//窗体类事件
+////////////////////////////////////////////////////////////////////////////////    
+
+//监视窗口关闭行为
+win.on('close', function() {
+    if (documentChanged) {
+        dialog.display("You have changed the document,save it before exit?", false, "ync", function(dialogReturn) {
+            if (typeof (dialogReturn) === "boolean") {
+                if (dialogReturn) {
+                    if (documentIsFile)
+                        Adolfans.saveFile($("#open_dialog").val());
+                    else
+                        $("#save_dialog").click();
+                }
+                this.close(true);
+            }
+        });
+    } else {
+        this.close(true);
+    }
+});
 
 $(document).ready(function() {
-//快捷键绑定
+    ////////////////////////////////////////////////////////////////////////////////
+    //文件操作类事件
+    ////////////////////////////////////////////////////////////////////////////////
 
     //打开快捷键
     $(document).bind('keydown', 'ctrl+o', function(evt) {
-        $("#open_dialog").click();
+        if (documentChanged) {
+            dialog.display("Save the document?", false, "ync", function(dialogReturn) {
+                console.log(dialogReturn);
+                if (typeof (dialogReturn) === "boolean") {
+                    if (dialogReturn) {
+                        if (documentIsFile)
+                            Adolfans.saveFile($("#open_dialog").val());
+                        else
+                            $("#save_dialog").click();
+                    }
+                    $("#open_dialog").click();
+                }
+
+            });
+        } else {
+            $("#open_dialog").click();
+        }
         evt.preventDefault();
         return false;
+    });
+
+    //打开事件监听
+    $("#open_dialog").bind('change', function() {
+        Adolfans.openFile($("#open_dialog").val());
+        documentIsFile = true;
+        documentChanged = false;
     });
 
     //保存快捷键
     $(document).bind('keydown', 'Ctrl+s', function(evt) {
-        Adolfans.saveFile($("#open_dialog").val());
+        if (documentIsFile)
+            Adolfans.saveFile($("#open_dialog").val());
+        else
+            $("#save_dialog").click();
         evt.preventDefault();
         return false;
     });
 
-    //粘贴事件
+    //保存事件监听
+    $("#save_dialog").bind('change', function() {
+        Adolfans.saveFile($("#save_dialog").val());
+        documentChanged = false;
+    });
+
     mainArea = document.getElementById("main_area");
+    //文档状态监听,顺便更新字数统计
+    $("#main_area").bind('blur keyup paste input', function() {
+        documentChanged = true;
+        var text = $("#main_area").text();
+        var count = text.length;
+        $("#counter_words").html(count);
+    });
+    ////////////////////////////////////////////////////////////////////////////////
+    //格式操作类事件
+    ////////////////////////////////////////////////////////////////////////////////
+
     //监视粘贴行为并对将要粘贴的内容进行格式化
     mainArea.addEventListener("paste", function(e) {
         //开始数据处理
@@ -33,12 +99,6 @@ $(document).ready(function() {
         console.log(dataCleaned);
         e.preventDefault();
         return false;
-    });
-
-    //打开事件监听
-    $("#open_dialog").bind('change', function() {
-        Adolfans.openFile($("#open_dialog").val());
-        console.log("File Opened;");
     });
 
     //呼出右键菜单
@@ -55,12 +115,10 @@ $(document).ready(function() {
 
     //菜单消失
     $(document).bind("click keydown", function() {
-        setTimeout(function() {
-            if (actionSwitch.functionMenu === 1) {
-                $("#menu_content").hide();
-                actionSwitch.functionMenu = 0;
-            }
-        }, 10);
+        if (actionSwitch.functionMenu === 1) {
+            $("#menu_content").hide();
+            actionSwitch.functionMenu = 0;
+        }
     });
 
     //呼出heading菜单
@@ -73,48 +131,22 @@ $(document).ready(function() {
         $("#heading_list li").css("height", "0");
     });
 
-    //绑定功能
-    $("#bold").click(function() {
-        document.execCommand('bold', true, null);
-    });
+    //绑定一般格式功能
+    var functionAction = ["bold", "italic", "cut", "copy", "paste"];
+    for (x in functionAction) {
+        var actionName = functionAction[x];
+        var actionElement = "#" + actionName;
+        $(actionElement).click(function() {
+            document.execCommand(actionName, true, null);
+        });
+    }
 
-    $("#italic").click(function() {
-        document.execCommand('italic', true, null);
-    });
-
-    $("#cut").click(function() {
-        document.execCommand('cut', true, null);
-    });
-
-    $("#copy").click(function() {
-        document.execCommand('copy', true, null);
-    });
-
-    $("#paste").click(function() {
-        document.execCommand('paste', true, null);
-    });
-
-    $("#h1").click(function() {
-        document.execCommand('formatBlock', true, "<h1>");
-    });
-
-    $("#h2").click(function() {
-        document.execCommand('formatBlock', true, "<h2>");
-    });
-
-    $("#h3").click(function() {
-        document.execCommand('formatBlock', true, "<h3>");
-    });
-
-    $("#h4").click(function() {
-        document.execCommand('formatBlock', true, "<h4>");
-    });
-
-    $("#h5").click(function() {
-        document.execCommand('formatBlock', true, "<h5>");
-    });
-
-    $("#h6").click(function() {
-        document.execCommand('formatBlock', true, "<h6>");
-    });
+    //绑定标题格式功能
+    for (var i = 0; i < 6; i++) {
+        var actionElement = "#h" + i;
+        var actionTag = "<h" + i + ">";
+        $(actionElement).click(function() {
+            document.execCommand('formatBlock', true, actionTag);
+        });
+    }
 });
