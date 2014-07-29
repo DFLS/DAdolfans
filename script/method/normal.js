@@ -15,3 +15,6 @@ var win=gui.Window.get();
 var actionSwitch = [];
 var documentChanged = false;
 var documentIsFile = false;
+var screenPosition=[];
+screenPosition.y=0;
+var arrorDraging=false;

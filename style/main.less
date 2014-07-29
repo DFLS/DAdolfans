@@ -7,10 +7,10 @@
     Author     : Losses
 */
 
-@editor-top:70px;
+@editor-top:50px;
 
 @menu-width:165px;
-@icon-size:34px;
+@icon-size:30px;
 
 .border{
     border:1px solid #bebebe;
@@ -35,10 +35,7 @@
     margin:0;
     padding:0;
     outline:none;
-}
-
-body{
-    position:realtive;
+    -webkit-user-select:none;
 }
 
 ul{
@@ -49,33 +46,111 @@ li button {
     border:0;
 }
 
-header{
-    width:100%;
-    height:50px;
-    background:rgba(255,255,255,0.8);
-    box-shadow:0 3px 3px rgba(0,0,0,0.2);
-    position:fixed;
-    z-index:3;
-    -webkit-user-select:none;
+.icon{
+    transition: all 0.1s ease-in-out;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 //窗体样式
 ////////////////////////////////////////////////////////////////////////////////
 
+header{
+    width:100%;
+    height:30px;
+    background:no-repeat rgba(255,255,255,0.8);
+    background-image: url(../image/logo.png);
+    background-size:30px 30px;
+    box-shadow:0 3px 3px rgba(0,0,0,0.2);
+    position:fixed;
+    z-index:3;
+    -webkit-user-select:none;
+}
+
+#title_drag_area{
+    top:0;
+    left:0;
+    width:~"-webkit-calc( 100% - 28px )";
+    height:30px;
+    position:fixed;
+    -webkit-app-region: drag;
+}
+
+#iconset{
+    right:0;
+    position:absolute;
+    z-index:10;
+    
+    >.icon{
+        width:18px;
+        height:18px;
+        margin:5px;
+    }
+
+    >.icon:hover{
+        opacity:0.8;
+    }
+
+    >.icon:active{
+        opacity:0.9;
+    }
+
+    #close{
+        background: url(../image/close.png);
+    }
+}
+
 #main_area{
     left:50%;
     width:40em;
-    height:~"-webkit-calc(100% -" @editor-top~")";
+    height:~"-webkit-calc(100% -" @editor-top ~")";
     border:0;
     padding:@editor-top 0 0 0;
     margin-left:-20em;
     font:15px/30px "microsoft yahei";
+    overflow-y: scroll;
     position:absolute;
     z-index:1;
     resize: none;
 }
 
+#frame{
+    bottom:0;
+    left:0;
+    width:~"-webkit-calc( 100% - 2px )";
+    height:~"-webkit-calc( 100% - 2px )";
+    border:1px solid rgba(0,0,0,0.1); 
+    position:fixed;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//导航器
+////////////////////////////////////////////////////////////////////////////////
+
+#navigator_hotarea{
+    top:@editor-top;
+    right:0;
+    width:34px;
+    height:~"-webkit-calc(100% -" @editor-top~")";
+    position:fixed;
+
+    #navigator_arror{
+        top:50px;
+        right:0;
+        width:34px;
+        height:28px;
+        margin-top:-14px;
+        background:url(../image/arrow.png);
+        position:fixed;
+        opacity: 0;
+        transition-property:opacity,right;
+        transition-duration:0.2s;
+        transition-timing-function:ease-in-out;
+    }
+}
 ////////////////////////////////////////////////////////////////////////////////
 //右键菜单
 ////////////////////////////////////////////////////////////////////////////////
@@ -83,25 +158,25 @@ header{
 .menu{
     .ui;
     font:13px/30px "microsoft yahei";
-    padding:5px;
     position:fixed;
     display:none;
     cursor:default;
-    -webkit-user-select:none;
+    //-webkit-user-select:none;
     z-index:3;
     .icon{
         width:@icon-size;
         height:@icon-size;
-        margin:3px;
+        margin:3px 5px;
     }
+
     .icon:hover{
         -webkit-filter:brightness(25%);
     }
     .line{
         width:168px;
-        height:1px;
-        border-top:1px solid #c1c1c1;
+        height:0px;
         margin:0 2px;
+        border-top:1px solid #c1c1c1;
         clear:both;
         display:block;
     }
@@ -112,6 +187,15 @@ header{
 
 #menu_main{
     display:none;
+}
+
+.menu_line_item{
+    height:40px;
+    overflow:hidden;
+}
+
+.menu_line_item:hover{
+    background:#f4f8ff;
 }
 
 #menu_content{
@@ -146,7 +230,7 @@ header{
         } 
         #list_style{
             #list_style_heading{
-                margin:0 0 0 20px;
+                padding:0 0 0 20px;
                 width:112px;
                 line-height:35px;
                 float:left;
@@ -154,6 +238,13 @@ header{
             }
             #heading_list{
                 height:0;
+                button{
+                    width:100%;
+                    height:30px;
+                    padding:0 0 0 25px;
+                    background:none;
+                    text-align:left;
+                }
             }
             #follow{
                 background:url(../image/following.png);
@@ -162,9 +253,8 @@ header{
             }
             ul{
                 .list{
+                    width:~"-webkit-clac(100% - 25px)";
                     height:0;
-                    width:100%;
-                    margin:0 25px;
                     overflow:hidden;
                     float:none;
                     display:block;
@@ -172,7 +262,6 @@ header{
             }
         }
         #list_list{
-            margin:0 0 0 10px;
             line-height:40px;
             display:block;
             li{
@@ -180,6 +269,9 @@ header{
                 margin:0 5px;
             }
         }
+    }
+    .style{
+        width:100%;
     }
 }
 
@@ -200,7 +292,7 @@ header{
     top:50%;
     width:500px;
     margin:-100px 0 0 -250px;
-    position:absolute;
+    position:fixed;
     z-index:5;
     -webkit-user-select:none;
 
@@ -245,7 +337,7 @@ header{
             background: #0066ff;
             color:white;
             border:1px solid #0050c9;
-            text-decoration: bold;
+            font-weight: bold;
         }
 
         .default:hover{

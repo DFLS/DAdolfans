@@ -5,20 +5,25 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 //窗体类事件
-////////////////////////////////////////////////////////////////////////////////    
+////////////////////////////////////////////////////////////////////////////////   
 
 //监视窗口关闭行为
 win.on('close', function() {
+    var that = this;
     if (documentChanged) {
         dialog.display("You have changed the document,save it before exit?", false, "ync", function(dialogReturn) {
             if (typeof (dialogReturn) === "boolean") {
                 if (dialogReturn) {
-                    if (documentIsFile)
-                        Adolfans.saveFile($("#open_dialog").val());
-                    else
+                    if (documentIsFile) {
+                        Adolfans.saveFile($("#open_dialog").val(), function() {
+                            that.close(true);
+                        });
+                    } else {
                         $("#save_dialog").click();
+                    }
+                } else {
+                    that.close(true);
                 }
-                this.close(true);
             }
         });
     } else {
@@ -27,31 +32,66 @@ win.on('close', function() {
 });
 
 $(document).ready(function() {
+
+    //窗口关闭按钮
+    $("#close").on('click', function() {
+        win.close();
+    });
+
+    //绑定滑入热区事件
+    $("#navigator_hotarea").on("mouseover", function() {
+        var mainAreaScrollPositionPercent = $("#main_area").scrollTop() / ($("#main_area")[0].scrollHeight - $(document).height());
+        var arrorPosition = (($("#navigator_hotarea").height() - 50) * mainAreaScrollPositionPercent) + 50;
+        $("#navigator_arror").css({"top": arrorPosition + "px", "opacity": "1", "right": "5px"});
+    });
+
+    $("#navigator_hotarea").on("mouseleave", function() {
+        if (!arrorDraging)
+            $("#navigator_arror").css({"opacity": "0", "right": "0px"});
+    });
+
+    //这俩是滚针事件
+    $("#navigator_arror").on("mousedown", function() {
+        arrorDraging = true;
+        $(document).on("mousemove", function(evt) {
+            screenPosition.y = evt.pageY;
+            if (screenPosition.y < 50)
+                arrowY = 50;
+            else if (screenPosition.y > $("#navigator_hotarea").height())
+                arrorY = $("#navigator_hotarea").height();
+            else
+                arrowY = screenPosition.y;
+            var arrorPositionPercent = ($("#navigator_arror").position().top - 50) / ($("#navigator_hotarea").height() - 50);
+            var arrorScrollPosition = ($("#main_area")[0].scrollHeight - $(document).height()) * arrorPositionPercent;
+            $("#navigator_arror").css("top", arrowY + "px");
+            $("#main_area").scrollTop(arrorScrollPosition);
+        });
+    });
+
+    $(document).on("mouseup", function() {
+        arrorDraging = false;
+        $(document).off("mousemove");
+        $("#navigator_arror").css({"opacity": "0", "right": "0"});
+
+    });
     ////////////////////////////////////////////////////////////////////////////////
     //文件操作类事件
     ////////////////////////////////////////////////////////////////////////////////
 
+    //新建快捷键
+    $(document).bind('keydown', 'ctrl+n', function(evt) {
+        windows.saveCheck(function() {
+            $("#main_area").html("");
+            documentIsFile = false;
+            documentChanged = false;
+        });
+    });
+
     //打开快捷键
     $(document).bind('keydown', 'ctrl+o', function(evt) {
-        if (documentChanged) {
-            dialog.display("Save the document?", false, "ync", function(dialogReturn) {
-                console.log(dialogReturn);
-                if (typeof (dialogReturn) === "boolean") {
-                    if (dialogReturn) {
-                        if (documentIsFile)
-                            Adolfans.saveFile($("#open_dialog").val());
-                        else
-                            $("#save_dialog").click();
-                    }
-                    $("#open_dialog").click();
-                }
-
-            });
-        } else {
+        windows.saveCheck(function() {
             $("#open_dialog").click();
-        }
-        evt.preventDefault();
-        return false;
+        });
     });
 
     //打开事件监听
@@ -74,6 +114,7 @@ $(document).ready(function() {
     //保存事件监听
     $("#save_dialog").bind('change', function() {
         Adolfans.saveFile($("#save_dialog").val());
+        documentIsFile = true;
         documentChanged = false;
     });
 
@@ -96,7 +137,6 @@ $(document).ready(function() {
         var data = clipboard.getData('text/html');
         var dataCleaned = regex.tagsReg(data);
         document.execCommand('inserthtml', false, dataCleaned);
-        console.log(dataCleaned);
         e.preventDefault();
         return false;
     });
@@ -122,31 +162,60 @@ $(document).ready(function() {
     });
 
     //呼出heading菜单
-    $("#follow,#heading_list").mouseover(function() {
-        $("#heading_list").css("height", "230px");
+    $("#follow").mouseover(function() {
+        $("#heading_list,#list_style").css("height", "230px");
         $("#heading_list li").css("height", "30px");
     });
-    $("#follow,#heading_list").mouseout(function() {
+
+    $("#list_style").mouseleave(function() {
+        $("#list_style").css("height", "40px");
         $("#heading_list").css("height", "0");
         $("#heading_list li").css("height", "0");
     });
 
     //绑定一般格式功能
-    var functionAction = ["bold", "italic", "cut", "copy", "paste"];
-    for (x in functionAction) {
-        var actionName = functionAction[x];
-        var actionElement = "#" + actionName;
-        $(actionElement).click(function() {
-            document.execCommand(actionName, true, null);
-        });
-    }
+    $("#bold").click(function() {
+        document.execCommand('bold', true, null);
+    });
+
+    $("#italic").click(function() {
+        document.execCommand('italic', true, null);
+    });
+
+    $("#cut").click(function() {
+        document.execCommand('cut', true, null);
+    });
+
+    $("#copy").click(function() {
+        document.execCommand('copy', true, null);
+    });
+
+    $("#paste").click(function() {
+        document.execCommand('paste', true, null);
+    });
 
     //绑定标题格式功能
-    for (var i = 0; i < 6; i++) {
-        var actionElement = "#h" + i;
-        var actionTag = "<h" + i + ">";
-        $(actionElement).click(function() {
-            document.execCommand('formatBlock', true, actionTag);
-        });
-    }
+    $("#h1").click(function() {
+        document.execCommand('formatBlock', true, "<h1>");
+    });
+
+    $("#h2").click(function() {
+        document.execCommand('formatBlock', true, "<h2>");
+    });
+
+    $("#h3").click(function() {
+        document.execCommand('formatBlock', true, "<h3>");
+    });
+
+    $("#h4").click(function() {
+        document.execCommand('formatBlock', true, "<h4>");
+    });
+
+    $("#h5").click(function() {
+        document.execCommand('formatBlock', true, "<h5>");
+    });
+
+    $("#h6").click(function() {
+        document.execCommand('formatBlock', true, "<h6>");
+    });
 });

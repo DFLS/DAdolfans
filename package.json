@@ -1,0 +1,30 @@
+{
+    "main": "index.html",
+    "name": "DAdolfans",
+    "description": "A simple app for writing articles.",
+    "version": "0.0.1 pre Alpha",
+    "keywords": ["prealpha", "DAdolfans", "writing", "editor"],
+    "window": {
+        "title": "DAdolfans",
+        "icon": "da.ico",
+        "toolbar": false,
+        "frame": false,
+        "width": 800,
+        "height": 500,
+        "position": "mouse"
+    },
+    "webkit": {
+        "plugin": true
+    },
+    "licenses": {
+        "type": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+    },
+    "repositories":
+            {
+                "type": "git",
+                "url": "https://github.com/Losses/DAdolfans.git",
+                "path": "/"
+            }
+
+}

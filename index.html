@@ -11,22 +11,26 @@ You can use the code under CC BY-SA 3.0.
         <link href="style/main.css" rel="stylesheet" type="text/css"/>
         <script src="script/lib/jquery-1.11.1.min.js" type="text/javascript"></script>
         <script src="script/lib/jquery.hotkeys.js" type="text/javascript"></script>
-        <script src="script/lib/jquery.contentchanged.js" type="text/javascript"></script>
         <script src="script/lib/countable.js" type="text/javascript"></script>
-        <script src="script/normal.js" type="text/javascript"></script>
-        <script src="script/regex.js" type="text/javascript"></script>
-        <script src="script/fs.js" type="text/javascript"></script>
-        <script src="script/mouse.js" type="text/javascript"></script>
-        <script src="script/dialog.js" type="text/javascript"></script>
+        <script src="script/method/normal.js" type="text/javascript"></script>
+        <script src="script/method/fs.js" type="text/javascript"></script>
+        <script src="script/method/mouse.js" type="text/javascript"></script>
+        <script src="script/method/dialog.js" type="text/javascript"></script>
+        <script src="script/method/regex.js" type="text/javascript"></script>
+        <script src="script/method/windows.js" type="text/javascript"></script>
         <script src="script/action.js" type="text/javascript"></script>
     </head>
     <body>
-        <header>
-            <img src="image/logo.png" alt="DAdolfans"/>
-        </header>
+        <div id="title_drag_area"></div>
+        <header></header>
+        <div id="iconset"><div class="icon" id="close"></div></div>
         <div id="main_area" contenteditable="true"></div>
         <!--计数器-->
         <div id="counter"><a id="counter_words">0</a> Characters.</div>
+        <!--导航条-->
+        <div id="navigator_hotarea">
+            <div id="navigator_arror"></div>
+        </div>
         <!--右键菜单元素-->
         <div id="menu_main">
             <ul>
@@ -34,35 +38,45 @@ You can use the code under CC BY-SA 3.0.
             </ul>
         </div>
         <div id="menu_content" class="menu">
-            <ul id="menu_function">
+
+            <!--功能类操作按钮集-->
+            <ul id="menu_function" class="menu_line_item">
                 <li><button class="icon action" id="cut"></button></li>
                 <li><button class="icon action" id="copy"></button></li>
                 <li><button class="icon action" id="paste"></button></li>
                 <li><button class="icon action" id="pasteApt"></button></li>
             </ul>
+
             <div class="line"></div>
+
+            <!--格式类操作按钮集-->
             <ul id="menu_format">
-                <li class="style">
-                    <button class="icon format" id="bold"></button>
-                    <button class="icon format" id="italic"></button>
-                    <button class="icon format" id="code"></button>
-                    <button class="icon format" id="link"></button>
-                </li>
+                <ul class="style menu_line_item">
+                    <li><button class="icon format" id="bold"></button></li>
+                    <li><button class="icon format" id="italic"></button></li>
+                    <li><button class="icon format" id="code"></button></li>
+                    <li><button class="icon format" id="link"></button></li>
+                </ul>
+
                 <li class="line"></li>
-                <li class="list" id="list_style">
-                    <a id="list_style_heading">Heading</a><a class="icon format" id="follow"></a>
+
+                <li class="list style" id="list_style">
+                    <div  class=" menu_line_item">
+                        <a id="list_style_heading">Heading</a>
+                        <a class="icon format" id="follow"></a>
+                    </div>
                     <a class="clear"></a>
                     <ul id="heading_list">
-                        <li class="list format"><button id="h1">H1</button></li>
-                        <li class="list format"><button id="h2">H2</button></li>
-                        <li class="list format"><button id="h3">H3</button></li>
-                        <li class="list format"><button id="h4">H4</button></li>
-                        <li class="list format"><button id="h5">H5</button></li>
-                        <li class="list format"><button id="h6">H6</button></li>
+                        <li class="list format menu_line_item"><button id="h1">H1</button></li>
+                        <li class="list format menu_line_item"><button id="h2">H2</button></li>
+                        <li class="list format menu_line_item"><button id="h3">H3</button></li>
+                        <li class="list format menu_line_item"><button id="h4">H4</button></li>
+                        <li class="list format menu_line_item"><button id="h5">H5</button></li>
+                        <li class="list format menu_line_item"><button id="h6">H6</button></li>
                     </ul>
                 </li>
                 <li class="line"></li>
-                <li class="style">
+                <li class="style menu_line_item">
                     <ul id="list_list">
                         <li class="list format">● Adol</li>
                         <li class="list format">1. Adol</li>
@@ -88,5 +102,6 @@ You can use the code under CC BY-SA 3.0.
                 <button id="cancel">Cancel</button>
             </div>
         </div>
+        <div id="frame"></div>
     </body>
 </html>
