@@ -10,11 +10,11 @@ var dialog = {
         //设置dialog标题
         $("#dialog_title").text(title);
         //判断dialog是否需要文本输入框
-        if (ifTextarea){
-            $("#dialog").attr("class","with_input");
+        if (ifTextarea) {
+            $("#dialog").attr("class", "with_input");
             $("#dialog_input").show();
-        }else{
-            $("#dialog").attr("class","without_input");
+        } else {
+            $("#dialog").attr("class", "without_input");
         }
         //判断需要的按钮组
         if (buttonMode === "yn")
@@ -23,10 +23,17 @@ var dialog = {
             $("#yes,#no,#cancel").show();
         else if (buttonMode === "cc")
             $("#confirm,#cancel").show();
+
         $("#dialog").show();
+
+        if (ifTextarea)
+            $("#dialog_input").focus();
         //当单击不同的按钮时返回不同的操作类型
         $('#yes,#confirm').click(function() {
-            this.returnValue = true;
+            if (ifTextarea)
+                this.returnValue = true;
+            else
+                this.returnValue = $("#dialog_input").text();
             callback(this.returnValue);
             that.away();
         });
@@ -41,7 +48,6 @@ var dialog = {
             that.away();
         });
     },
-    
     away: function() {
         var dialogElements = ["#yes", "#no", "#cancel", "#confirm", "#dialog_input"];
         for (x in dialogElements) {
