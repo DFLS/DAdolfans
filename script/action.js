@@ -182,6 +182,16 @@ $(document).ready(function() {
         document.execCommand('italic', true, null);
     });
 
+    $("#link").click(function() {
+        mouse.getSelection();
+        dialog.display("Inupt the URL of the link you want to insert.", true, "cc", function(linkURl) {
+            if (linkURl !== false) {
+                mouse.replaceSelection();
+                document.execCommand('CreateLink', false, linkURl);
+            }
+        });
+    });
+
     $("#cut").click(function() {
         document.execCommand('cut', true, null);
     });
