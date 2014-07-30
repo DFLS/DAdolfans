@@ -11,6 +11,7 @@ emitter.setMaxListeners(30);
 //开始调用node-webkit库
 var gui=require('nw.gui');
 var win=gui.Window.get();
+var clipboard = gui.Clipboard.get();
 //变量初始化
 var actionSwitch = [];
 var documentChanged = false;

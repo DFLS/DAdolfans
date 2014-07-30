@@ -16,5 +16,14 @@ var regex = {
         var dataReg = dataReg.replace(tagsCleanExpression, '<$1>');
         //将文档内容回填至编辑框
         return dataReg;
+    },
+    plainTextToHTML: function(data) {
+        var blankLine = new RegExp("\\n[\\s|]*\\r", "g");
+        var newLineMark = new RegExp('\n|\r|(\r\n)|(\u0085)|(\u2028)|(\u2029)', "g");
+        var duoBr = new RegExp('<br /><br />', "g");
+        var dataReg = data.replace(blankLine, '');
+        var dataReg = dataReg.replace(newLineMark, '<br />');
+        var dataReg = dataReg.replace(duoBr, '<br />');
+        return dataReg;
     }
 };

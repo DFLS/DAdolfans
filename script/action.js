@@ -173,7 +173,7 @@ $(document).ready(function() {
         $("#heading_list").css("height", "0");
         $("#heading_list li").css("height", "0");
     });
-    
+
 //-------------------------------------------------------------------------//
 //右键菜单内选项
 //-------------------------------------------------------------------------//   
@@ -187,6 +187,14 @@ $(document).ready(function() {
 
     $("#paste").click(function() {
         document.execCommand('paste', true, null);
+    });
+
+    $("#pasteApt").click(function() {
+        var clipboardData = clipboard.get('text');
+        var insertData = regex.plainTextToHTML(clipboardData);
+        console.log(clipboardData);
+        console.log(insertData);
+        document.execCommand('inserthtml', false, insertData);
     });
 
     //绑定一般格式功能
