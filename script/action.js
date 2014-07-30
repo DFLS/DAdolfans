@@ -82,8 +82,11 @@ $(document).ready(function() {
     $(document).bind('keydown', 'ctrl+n', function(evt) {
         windows.saveCheck(function() {
             $("#main_area").html("");
+            filePath = null;
             documentIsFile = false;
             documentChanged = false;
+            firstDocumentChange = true;
+            windows.refreshTitle();
         });
     });
 
@@ -97,16 +100,26 @@ $(document).ready(function() {
     //打开事件监听
     $("#open_dialog").bind('change', function() {
         Adolfans.openFile($("#open_dialog").val());
+        filePath = $("#open_dialog").val();
         documentIsFile = true;
         documentChanged = false;
+        firstDocumentChange = true;
+        windows.refreshTitle();
     });
 
     //保存快捷键
     $(document).bind('keydown', 'Ctrl+s', function(evt) {
         if (documentIsFile)
             Adolfans.saveFile($("#open_dialog").val());
-        else
+        else {
             $("#save_dialog").click();
+            filePath = $("#save_dialog").val();
+        }
+        
+        documentIsFile = true;
+        documentChanged = false;
+        firstDocumentChange = true;
+        windows.refreshTitle();
         evt.preventDefault();
         return false;
     });
@@ -114,17 +127,19 @@ $(document).ready(function() {
     //保存事件监听
     $("#save_dialog").bind('change', function() {
         Adolfans.saveFile($("#save_dialog").val());
-        documentIsFile = true;
-        documentChanged = false;
     });
 
     mainArea = document.getElementById("main_area");
-    //文档状态监听,顺便更新字数统计
-    $("#main_area").bind('blur keyup paste input', function() {
+    //文档状态监听,顺便更新字数统计，再顺便更新下标题栏
+    $("#main_area").bind('keyup paste input', function() {
         documentChanged = true;
         var text = $("#main_area").text();
         var count = text.length;
         $("#counter_words").html(count);
+        //更新标题栏
+        if (firstDocumentChange)
+            windows.refreshTitle();
+        firstDocumentChange = false;
     });
 
     ////////////////////////////////////////////////////////////////////////////////

@@ -23,6 +23,17 @@ var windows = {
             actionContinue();
         }
         return false;
+    },
+    refreshTitle: function() {
+        if (documentIsFile)
+            var windowTitle = regex.FileURl(filePath);
+        else
+            var windowTitle = "Untitled";
+
+        if (documentChanged)
+            windowTitle = "<b>" + windowTitle + "</b>";
+
+        $("#my_adolfans").html(windowTitle);
     }
 };
 

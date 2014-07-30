@@ -25,5 +25,16 @@ var regex = {
         var dataReg = dataReg.replace(newLineMark, '<br />');
         var dataReg = dataReg.replace(duoBr, '<br />');
         return dataReg;
+    },
+    FileURl: function(data) {
+        //判断是否是*Unix操作系统
+        if (data.substr(0, 1) === "/")
+            separator = "/";//*Unix操作系统
+        else
+            separator = "\\";//Windows操作系统
+        var filePathArray = data.split(separator);
+        var fileName = filePathArray[filePathArray.length - 1];
+        console.log(fileName);
+        return fileName;
     }
 };
