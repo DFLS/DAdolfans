@@ -11,7 +11,7 @@
         "frame": false,
         "width": 800,
         "height": 500,
-        "position": "mouse"
+        "position": "center"
     },
     "webkit": {
         "plugin": true
