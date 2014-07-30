@@ -126,6 +126,7 @@ $(document).ready(function() {
         var count = text.length;
         $("#counter_words").html(count);
     });
+
     ////////////////////////////////////////////////////////////////////////////////
     //格式操作类事件
     ////////////////////////////////////////////////////////////////////////////////
@@ -172,6 +173,21 @@ $(document).ready(function() {
         $("#heading_list").css("height", "0");
         $("#heading_list li").css("height", "0");
     });
+    
+//-------------------------------------------------------------------------//
+//右键菜单内选项
+//-------------------------------------------------------------------------//   
+    $("#cut").click(function() {
+        document.execCommand('cut', true, null);
+    });
+
+    $("#copy").click(function() {
+        document.execCommand('copy', true, null);
+    });
+
+    $("#paste").click(function() {
+        document.execCommand('paste', true, null);
+    });
 
     //绑定一般格式功能
     $("#bold").click(function() {
@@ -190,18 +206,6 @@ $(document).ready(function() {
                 document.execCommand('CreateLink', false, linkURl);
             }
         });
-    });
-
-    $("#cut").click(function() {
-        document.execCommand('cut', true, null);
-    });
-
-    $("#copy").click(function() {
-        document.execCommand('copy', true, null);
-    });
-
-    $("#paste").click(function() {
-        document.execCommand('paste', true, null);
     });
 
     //绑定标题格式功能
