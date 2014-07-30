@@ -115,7 +115,7 @@ $(document).ready(function() {
             $("#save_dialog").click();
             filePath = $("#save_dialog").val();
         }
-        
+
         documentIsFile = true;
         documentChanged = false;
         firstDocumentChange = true;

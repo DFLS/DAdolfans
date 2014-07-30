@@ -13,7 +13,6 @@ mouse = {
         for (var i = 0; i < selection.rangeCount; i++)
             ranges.push(selection.getRangeAt(i));
     },
-    
     replaceSelection: function() {
         if (collapsed)
             getSelection().collapse(anchorNode, anchorOffset);
