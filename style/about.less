@@ -1,0 +1,95 @@
+/*
+DAdolfans  By Losses Don
+You can use the code under CC BY-SA 3.0.
+*/
+/* 
+    Created on : Jul 31, 2014, 11:29:41 AM
+    Author     : Losses
+*/
+
+body{
+    width:335px;
+    height:450px;
+    overflow:hidden;
+    border:1px solid rgba(0,0,0,0.1); 
+}
+
+.about{
+    .about_i{
+        margin:15px;
+    }
+    h1{
+        font:bold 23px/30px serif;
+    }
+}
+
+#about_top{
+    background:url(../image/logo_huge.png) no-repeat;
+    padding-top:177px;
+    font:13px/20px serif;
+    i{
+        color:gray;
+        font:italic 12px/20px serif;
+    }
+    #copyright{
+        bottom:3px;
+        right:8px;
+        color:#c7c7c7;
+        text-align:right;
+        font:10px/20px serif;
+        position:fixed;
+    }
+
+    #about_top{
+        img{
+            width:200px;
+            height:200px;
+        }
+    }
+    #info{
+        transition: all 0.2s ease-in-out;
+    }
+    #adolfans{
+        top:220px;
+        left:65px;
+        position:absolute;
+        transition: all 0.2s ease-in-out;
+        -webkit-transform: rotateY(90deg);
+    }
+}
+
+#close_icon{
+    width:18px;
+    height:18px;
+    background:url(../image/close_about.png);
+    position: absolute;
+    right:10px;
+    top:10px;
+    transition: all 0.2s ease-in-out;
+}
+
+#close_icon:hover{
+    opacity: 0.8;
+}
+#close_icon:active{
+    opacity: 0.9;
+}
+
+.hotarea{
+    position:absolute;
+    -webkit-app-region: drag;
+}
+
+#hotarea_1{
+    top:0;
+    left:0;
+    width:307px;
+    height:28px;
+}
+
+#hotarea_2{
+    top:28px;
+    left:0;
+    width:337px;
+    height:149px;
+}

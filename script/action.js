@@ -32,6 +32,16 @@ win.on('close', function() {
 });
 
 $(document).ready(function() {
+    //呼出菜单
+    $("header").on('click', function() {
+        var win = gui.Window.open('about.html', {
+            position: 'center',
+            "toolbar": false,
+            "frame": false,
+            width: 337,
+            height: 452
+        });
+    })
 
     //窗口关闭按钮
     $("#close").on('click', function() {
