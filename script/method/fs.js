@@ -28,12 +28,20 @@ var Adolfans = {
         };
 
         //var fsBuffer=new Buffer (data, encoding='utf8');
-        fs.writeFileSync(file, '\ufeff' + data, writeOption);
-        
-        callback();
+        var that = this;
+        var error = false;
+        try {
+            fs.writeFileSync(file, '\ufeff' + data, writeOption);
+        } catch (err) {
+            dialog.display("An error happened when saving the document:" + err + ", If you are not sure the meaning, please contact the developer.", false, "ync", function() {
+            });
+            that.error = true;
+        }
+        if (!error)
+            callback();
     },
     //刷新监控器方法
-    refreshObserver:function(){
+    refreshObserver: function() {
         DocumentObserver.disconnect();
         DocumentObserver.observe(mainArea, DocumentObserverConfig);
     }
