@@ -38,7 +38,6 @@ $(document).ready(function() {
 
         $("#close_icon").on("click", function() {
             win.close();
-            console.log("yay");
         });
     });
 });
