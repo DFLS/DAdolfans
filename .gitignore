@@ -64,4 +64,14 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+
+# Netbeans Files
 /nbproject/private/
+/nbproject
+
+#Project's template file
+content.txt
+
+#CSS Files
+/style/about.css
+/style/main.css
