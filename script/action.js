@@ -96,6 +96,7 @@ $(document).ready(function() {
             documentIsFile = false;
             documentChanged = false;
             firstDocumentChange = true;
+            Adolfans.refreshObserver();
             windows.refreshTitle();
         });
     });
@@ -114,6 +115,7 @@ $(document).ready(function() {
         documentIsFile = true;
         documentChanged = false;
         firstDocumentChange = true;
+        Adolfans.refreshObserver();
         windows.refreshTitle();
     });
 
@@ -128,7 +130,9 @@ $(document).ready(function() {
 
         documentIsFile = true;
         documentChanged = false;
+        documentSavedAction = true;
         firstDocumentChange = true;
+        Adolfans.refreshObserver();
         windows.refreshTitle();
         evt.preventDefault();
         return false;
@@ -139,18 +143,25 @@ $(document).ready(function() {
         Adolfans.saveFile($("#save_dialog").val());
     });
 
-    mainArea = document.getElementById("main_area");
+
+    mainArea = document.querySelector("#main_area");
+
     //文档状态监听,顺便更新字数统计，再顺便更新下标题栏
-    $("#main_area").bind('keyup paste input', function() {
+
+    MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+    DocumentObserver = new MutationObserver(function(e) {
         documentChanged = true;
-        var text = $("#main_area").text();
-        var count = text.length;
+        var count = $("#main_area").text().length;
         $("#counter_words").html(count);
         //更新标题栏
         if (firstDocumentChange)
             windows.refreshTitle();
         firstDocumentChange = false;
     });
+
+    DocumentObserverConfig = {attributes: true, childList: true, characterData: true, subtree: true};
+
+    DocumentObserver.observe(mainArea, DocumentObserverConfig);
 
     ////////////////////////////////////////////////////////////////////////////////
     //格式操作类事件

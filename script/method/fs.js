@@ -31,5 +31,10 @@ var Adolfans = {
         fs.writeFileSync(file, '\ufeff' + data, writeOption);
         
         callback();
+    },
+    //刷新监控器方法
+    refreshObserver:function(){
+        DocumentObserver.disconnect();
+        DocumentObserver.observe(mainArea, DocumentObserverConfig);
     }
 };
