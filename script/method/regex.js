@@ -36,5 +36,10 @@ var regex = {
         var fileName = filePathArray[filePathArray.length - 1];
         console.log(fileName);
         return fileName;
+    },
+    formatClipboard: function() {
+        var clipboardData = clipboard.get('text');
+        var insertData = regex.plainTextToHTML(clipboardData);
+        return insertData;
     }
 };

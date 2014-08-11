@@ -179,7 +179,12 @@ $(document).ready(function() {
         //开始数据处理
         var clipboard = e.clipboardData;
         var data = clipboard.getData('text/html');
-        var dataCleaned = regex.tagsReg(data);
+        var dataCleaned;
+        //判断输入内容是否为纯文本
+        if (data == "")
+            dataCleaned = regex.formatClipboard();
+        else
+            dataCleaned = regex.tagsReg(data);
         document.execCommand('inserthtml', false, dataCleaned);
         e.preventDefault();
         return false;
@@ -233,8 +238,8 @@ $(document).ready(function() {
     });
 
     $("#pasteApt").click(function() {
-        var clipboardData = clipboard.get('text');
-        var insertData = regex.plainTextToHTML(clipboardData);
+
+        var insertData = regex.formatClipboard();
         console.log(clipboardData);
         console.log(insertData);
         document.execCommand('inserthtml', false, insertData);
