@@ -7,6 +7,11 @@
 //窗体类事件
 ////////////////////////////////////////////////////////////////////////////////   
 
+//打开开发人员窗口
+$(document).bind('keydown', 'f12', function(evt) {
+    win.showDevTools();
+});
+
 //监视窗口关闭行为
 win.on('close', function() {
     var that = this;
