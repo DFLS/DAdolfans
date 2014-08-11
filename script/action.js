@@ -190,6 +190,12 @@ $(document).ready(function() {
         return false;
     });
 
+    //纯文本粘贴
+    $(document).bind('keydown', 'Ctrl+Shift+V', function() {
+        var insertData = regex.formatClipboard();
+        document.execCommand('inserthtml', false, insertData);
+    });
+
     //呼出右键菜单
     $("#main_area").bind("contextmenu", function(evt) {
         $("#menu_content").css({
@@ -237,9 +243,8 @@ $(document).ready(function() {
         document.execCommand('paste', true, null);
     });
 
-    $("#pasteApt").click(function() {
-        var insertData = regex.formatClipboard();
-        document.execCommand('inserthtml', false, insertData);
+    $("#clearFormat").click(function() {
+        document.execCommand('RemoveFormat', false, null);
     });
 
     //绑定一般格式功能
