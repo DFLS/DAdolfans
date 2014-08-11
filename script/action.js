@@ -50,9 +50,11 @@ $(document).ready(function() {
 
     //绑定滑入热区事件
     $("#navigator_hotarea").on("mouseover", function() {
-        var mainAreaScrollPositionPercent = $("#main_area").scrollTop() / ($("#main_area")[0].scrollHeight - $(document).height());
-        var arrorPosition = (($("#navigator_hotarea").height() - 50) * mainAreaScrollPositionPercent) + 50;
-        $("#navigator_arror").css({"top": arrorPosition + "px", "opacity": "1", "right": "5px"});
+        if (($("#main_area")[0].scrollHeight - $(document).height()) !== 0) {
+            var mainAreaScrollPositionPercent = $("#main_area").scrollTop() / ($("#main_area")[0].scrollHeight - $(document).height());
+            var arrorPosition = (($("#navigator_hotarea").height() - 50) * mainAreaScrollPositionPercent) + 50;
+            $("#navigator_arror").css({"top": arrorPosition + "px", "opacity": "1", "right": "5px"});
+        }
     });
 
     $("#navigator_hotarea").on("mouseleave", function() {
