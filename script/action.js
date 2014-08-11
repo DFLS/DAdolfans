@@ -238,10 +238,7 @@ $(document).ready(function() {
     });
 
     $("#pasteApt").click(function() {
-
         var insertData = regex.formatClipboard();
-        console.log(clipboardData);
-        console.log(insertData);
         document.execCommand('inserthtml', false, insertData);
     });
 

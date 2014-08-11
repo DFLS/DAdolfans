@@ -34,7 +34,6 @@ var regex = {
             separator = "\\";//Windows操作系统
         var filePathArray = data.split(separator);
         var fileName = filePathArray[filePathArray.length - 1];
-        console.log(fileName);
         return fileName;
     },
     formatClipboard: function() {
