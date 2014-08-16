@@ -70,27 +70,39 @@ header{
     box-shadow:0 3px 3px rgba(0,0,0,0.2);
     position:fixed;
     z-index:3;
+    transition: all 0.3s ease-in-out;
     -webkit-user-select:none;
+}
+
+header.fulled{
+    margin-top:-30px;
 }
 
 #title_drag_area{
     top:0;
     left:30px;
-    width:~"-webkit-calc( 100% - 58px )";
+    width:~"-webkit-calc( 100% - 78px )";
     height:30px;
     position:fixed;
     -webkit-app-region: drag;
+}
+
+#title_drag_area.fulled{
+    -webkit-app-region: no-drag;
+    z-index:9;
 }
 
 #iconset{
     right:0;
     position:absolute;
     z-index:10;
+    margin:6px;
 
     >.icon{
         width:18px;
         height:18px;
-        margin:6px;
+        margin:0 0 0 5px;
+        display:inline-block;
     }
 
     >.icon:hover{
@@ -103,6 +115,14 @@ header{
 
     #close{
         background: url(../image/close.png);
+    }
+
+    #full_screen{
+        background: url(../image/fullscreen.png);
+    }
+    
+    #full_screen.fulled{
+        -webkit-transform:rotate(180deg);
     }
 }
 

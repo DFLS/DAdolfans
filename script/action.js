@@ -46,7 +46,35 @@ $(document).ready(function() {
             width: 337,
             height: 452
         });
-    })
+    });
+
+    //全屏事件
+
+    $("#full_screen").on('click', function() {
+        if (win.isFullscreen) {
+            clearTimeout(fullScreenTimeoutEvent);
+            win.leaveFullscreen();
+            $("header").removeClass("fulled");
+            $(this).removeClass("fulled");
+            $("header,#title_drag_area").removeClass("fulled");
+            $("#title_drag_area").off();
+        } else {
+            win.enterFullscreen();
+            $("header,#title_drag_area").addClass("fulled");
+            $(this).addClass("fulled");
+            $("#title_drag_area").on({
+                "mouseover": function() {
+                    clearTimeout(fullScreenTimeoutEvent);
+                    $("header").removeClass("fulled");
+                },
+                "mouseleave": function() {
+                    fullScreenTimeoutEvent = setTimeout(function() {
+                        $("header").addClass("fulled");
+                    }, 1000);
+                }
+            });
+        }
+    });
 
     //窗口关闭按钮
     $("#close").on('click', function() {
@@ -155,7 +183,7 @@ $(document).ready(function() {
 
     //文档状态监听,顺便更新字数统计，再顺便更新下标题栏
 
-    MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+    MutationObserver = window.MutationObserver;
     DocumentObserver = new MutationObserver(function(e) {
         documentChanged = true;
         var count = $("#main_area").text().length;

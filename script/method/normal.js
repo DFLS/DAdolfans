@@ -22,3 +22,4 @@ var documentSavedAction = false;
 var screenPosition = [];
 screenPosition.y = 0;
 var arrorDraging = false;
+var fullScreenTimeoutEvent;
