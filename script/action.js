@@ -245,15 +245,16 @@ $(document).ready(function() {
     });
 
     //呼出heading菜单
-    $("#follow").mouseover(function() {
-        $("#heading_list,#list_style").css("height", "230px");
-        $("#heading_list li").css("height", "30px");
-    });
-
-    $("#list_style").mouseleave(function() {
-        $("#list_style").css("height", "40px");
-        $("#heading_list").css("height", "0");
-        $("#heading_list li").css("height", "0");
+    $("#list_heading").on({
+        "mouseenter": function() {
+            timeoutEvent = setTimeout(function() {
+                $("#list_style_heading").addClass("selected");
+            }, 500);
+        },
+        "mouseleave":function(){
+            clearTimeout(timeoutEvent);
+            $("#list_style_heading").removeClass("selected");
+        }
     });
 
 //-------------------------------------------------------------------------//
@@ -317,5 +318,15 @@ $(document).ready(function() {
 
     $("#h6").click(function() {
         document.execCommand('formatBlock', true, "<h6>");
+    });
+    
+    //绑定列表功能
+    
+    $("#unordered_list").click(function() {
+        document.execCommand('InsertUnorderedList', true, "<h6>");
+    });
+    
+    $("#ordered_list").click(function() {
+        document.execCommand('InsertOrderedList', true, "<h6>");
     });
 });

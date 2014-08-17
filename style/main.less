@@ -120,7 +120,7 @@ header.fulled{
     #full_screen{
         background: url(../image/fullscreen.png);
     }
-    
+
     #full_screen.fulled{
         -webkit-transform:rotate(180deg);
     }
@@ -138,6 +138,12 @@ header.fulled{
     position:absolute;
     z-index:1;
     resize: none;
+    ul li{
+        list-style:square inside;
+    }
+    ol li{
+        list-style:decimal inside;
+    }
 }
 
 #frame{
@@ -196,6 +202,17 @@ header.fulled{
     .icon:hover{
         -webkit-filter:brightness(25%);
     }
+    
+    #list_list .icon,
+    #heading_list .icon{
+        width:100%;
+        height:40px;
+        margin:0;
+        background:none;
+        color:#555;
+        font-weight:bold;
+    }
+    
     .line{
         width:168px;
         height:0px;
@@ -252,28 +269,38 @@ header.fulled{
         #link{ 
             background:url(../image/link.png);
         } 
-        #list_style{
+        #list_heading{
+            width:172px;
+            height:40px;
+            overflow:hidden;
             #list_style_heading{
-                padding:0 0 0 20px;
-                width:112px;
-                line-height:35px;
+                width:172px;
+                line-height:40px;
+                padding:0 0 0 10px;
                 float:left;
-                display:block;
+                transition: all 0.2s ease-in-out;
+                display:inline-block;
+            }
+            #list_style_heading.selected{
+                transition: all 0.2s ease-in-out;
+                margin-left:-190px;
+            }
+            #list_heading{
+                width:172px;
             }
             #heading_list{
-                height:0;
-                button{
-                    width:100%;
-                    height:30px;
-                    padding:0 0 0 25px;
-                    background:none;
-                    text-align:left;
+                width:172px;
+                height:40px;
+                li{
+                    width:31px;
+                    height:40px;
+                    display:inline-block;
                 }
-            }
-            #follow{
-                background:url(../image/following.png);
-                float:right;
-                display:block;
+                button{
+                    width:31px;
+                    height:40px;
+                    background:none;
+                }
             }
             ul{
                 .list{
