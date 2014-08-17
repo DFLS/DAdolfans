@@ -226,10 +226,19 @@ $(document).ready(function() {
 
     //呼出右键菜单
     $("#main_area").bind("contextmenu", function(evt) {
+        var contentMenuX,contentMenuY;
+        if (window.innerHeight < evt.pageY + 174)
+            contentMenuY = evt.pageY - 174;
+        else
+            contentMenuY = evt.pageY;
+        if (window.innerWidth < evt.pageX + 165)
+            contentMenuX = evt.pageX - 165;
+        else
+            contentMenuX = evt.pageX;
         $("#menu_content").css({
             "display": "block",
-            "left": evt.pageX,
-            "top": evt.pageY
+            "left": contentMenuX,
+            "top": contentMenuY
         });
         actionSwitch.functionMenu = 1;
         evt.preventDefault();
@@ -251,7 +260,7 @@ $(document).ready(function() {
                 $("#list_style_heading").addClass("selected");
             }, 500);
         },
-        "mouseleave":function(){
+        "mouseleave": function() {
             clearTimeout(timeoutEvent);
             $("#list_style_heading").removeClass("selected");
         }
@@ -319,13 +328,13 @@ $(document).ready(function() {
     $("#h6").click(function() {
         document.execCommand('formatBlock', true, "<h6>");
     });
-    
+
     //绑定列表功能
-    
+
     $("#unordered_list").click(function() {
         document.execCommand('InsertUnorderedList', true, "<h6>");
     });
-    
+
     $("#ordered_list").click(function() {
         document.execCommand('InsertOrderedList', true, "<h6>");
     });
