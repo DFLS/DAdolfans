@@ -1,0 +1,87 @@
+@themecolor:#2c76ff;
+
+*{
+    margin:0;
+    padding:0;
+    list-style:none;
+    outline: none;
+}
+
+#main_nav{
+    width:80px;
+    height:100%;
+    background:#eee;
+    position:fixed;
+    -webkit-app-region: drag;
+    li{
+        width:100%;
+        height:60px;
+        text-align:center;
+        -webkit-app-region: no-drag;
+        img{
+            margin-top:15px;
+        }
+    }
+    li.selected{
+        background:@themecolor;
+        img{
+            -webkit-filter: invert(100%);
+        }
+    }
+}
+
+#setting_body{
+    padding:10px 0 0 100px;
+
+    h2{
+        border-left:@themecolor 3px solid;
+        padding:0 0 0 8px;
+        margin:5px 0;
+        font:17px/23px "microsoft yahei",sans-serif;
+    }
+
+    input[type="text"]{
+        width:80px;
+        border:none;
+        border-bottom:1px dashed #aaa;
+        margin:0 10px;
+        padding:0 5px 2px 5px;
+    }
+
+    input[type="checkbox"]{
+        margin:0 5px;
+    }
+
+    .setting_title,label{
+        color:#666;
+        font:14px/25px "microsoft yahei",sans-serif;
+    }
+
+    .line_item{
+        margin:0 0 0 15px;
+    }
+
+    .introduction{
+        margin-top:5px;
+        padding:0 20px 0 30px;
+        color:#777;
+        font:11px/18px "microsoft yahei",sans-serif;
+    }
+}
+
+#close_icon{
+    width:17px;
+    height:18px;
+    background:url(../image/close.png);
+    position: absolute;
+    right:10px;
+    top:10px;
+    transition: all 0.2s ease-in-out;
+}
+
+#close_icon:hover{
+    opacity: 0.8;
+}
+#close_icon:active{
+    opacity: 0.9;
+}

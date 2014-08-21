@@ -34,6 +34,7 @@ var windows = {
             windowTitle = "<b>" + windowTitle + "</b>";
 
         $("#my_adolfans").html(windowTitle);
-    }
+    },
+    settingWindow: {}
 };
 
