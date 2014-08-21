@@ -38,16 +38,26 @@ win.on('close', function() {
 
 $(document).ready(function() {
     //呼出菜单
-    $("header").on('click', function() {
-        var win = gui.Window.open('about.html', {
-            position: 'center',
-            "toolbar": false,
-            "frame": false,
-            width: 337,
-            height: 452
-        });
+    $("header").on({
+        'click': function() {
+            var win = gui.Window.open('about.html', {
+                position: 'center',
+                "toolbar": false,
+                "frame": false,
+                width: 337,
+                height: 452
+            });
+        },
+        'contextmenu': function() {
+            windows.settingWindow = gui.Window.open('settings.html', {
+                position: 'center',
+                "toolbar": false,
+                "frame": false,
+                width: 475,
+                height: 535
+            });
+        }
     });
-
     //全屏事件
 
     $("#full_screen").on('click', function() {
@@ -226,7 +236,7 @@ $(document).ready(function() {
 
     //呼出右键菜单
     $("#main_area").bind("contextmenu", function(evt) {
-        var contentMenuX,contentMenuY;
+        var contentMenuX, contentMenuY;
         if (window.innerHeight < evt.pageY + 174)
             contentMenuY = evt.pageY - 174;
         else
