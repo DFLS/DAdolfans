@@ -5,7 +5,7 @@
 
 //文件调用类库，豆娘是人类的真理！
 var Adolfans = {
-    //文件打开方法
+//文件打开方法
     openFile: function(file) {
         if (file !== "") {
             fs.readFile(file, 'utf8', function(err, data) {
@@ -26,7 +26,6 @@ var Adolfans = {
         var writeOption = {
             encoding: 'utf8'
         };
-
         //var fsBuffer=new Buffer (data, encoding='utf8');
         var that = this;
         var error = false;
@@ -44,5 +43,34 @@ var Adolfans = {
     refreshObserver: function() {
         DocumentObserver.disconnect();
         DocumentObserver.observe(mainArea, DocumentObserverConfig);
+    },
+    //设置选项读取与释放方法
+    settingFilePath: '../usr/',
+    settingFile: 'dadolfans.json',
+    settingOptions: {},
+    defaultSettingOptions: {
+        autosave: false,
+        autosaveTime: 30
+    },
+    readSettingFile: function() {
+        var SettingFileLocation = this.settingFilePath + this.settingFile;
+        if (fs.existsSync(SettingFileLocation)) {
+            this.settingOptions = JSON.parse(fs.readFileSync(SettingFileLocation).toString());
+        } else {
+            this.settingOptions = this.defaultSettingOptions;
+            this.writeSettingFile();
+        }
+    },
+    writeSettingFile: function(isDefault) {
+        var optObject;
+        isDefault = typeof (isDefault) == 'undefined' ? true : isDefault;
+        if (isDefault) {
+            optObject = this.defaultSettingOptions;
+        } else {
+            optObject = Adolfans.settingOptions;
+        }
+        var SettingFileLocation = this.settingFilePath + this.settingFile;
+        var settingJSONString = JSON.stringify(optObject);
+        fs.writeFileSync(SettingFileLocation, settingJSONString);
     }
 };
