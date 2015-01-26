@@ -69,6 +69,9 @@ $RECYCLE.BIN/
 /nbproject/private/
 /nbproject
 
+# Webstorm Files
+/.idea
+
 #Project's template file
 content.txt
 
