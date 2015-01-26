@@ -1,27 +1,35 @@
 var panel = {
-    collectSettings: function() {
-        Adolfans.settingOptions.autosave = $("#autosave").is(":checked");
-        Adolfans.settingOptions.shortcut = $("#shortcut").val();
-        Adolfans.writeSettingFile(false);
+    collectSettings: function () {
+        wm.cp(function (p) {
+            var options = {
+                autosave: $("#autosave").is(":checked"),
+                autosaveTime: $("#autosavetime").val()
+            }
+
+            p.Adolfans.writeSettingFile(options);
+
+            p.Adolfans.applySettingFile(true);
+        });
     },
-    readSettings: function() {
-        $("#shortcut").val(Adolfans.settingOptions.shortcut);
+    readSettings: function () {
+        $("#autosavetime").val(Adolfans.settingOptions.autosavetime);
         if (Adolfans.settingOptions.autosave)
-            $("#anti_emoji").attr("checked", "checked");
+            $("#autosave").attr("checked", "checked");
     }
 };
 
-$(document).ready(function() {
+$(document).ready(function () {
     panel.readSettings();
-    $("input[type='text']").on("blur", function() {
+
+    $("input[type='text']").on("blur", function () {
         panel.collectSettings();
     });
 
-    $("input[type='radio'],input[type='checkbox']").on("change", function() {
+    $("input[type='radio'],input[type='checkbox']").on("change", function () {
         panel.collectSettings();
     });
 
-    $("#close_icon").on("click", function() {
+    $("#close_icon").on("click", function () {
         win.close(true);
     });
 });

@@ -6,9 +6,9 @@
 //文件调用类库，豆娘是人类的真理！
 var Adolfans = {
 //文件打开方法
-    openFile: function(file) {
+    openFile: function (file) {
         if (file !== "") {
-            fs.readFile(file, 'utf8', function(err, data) {
+            fs.readFile(file, 'utf8', function (err, data) {
                 if (err) {
                     console.error(err);
                     return;
@@ -19,8 +19,9 @@ var Adolfans = {
         }
     },
     //文件保存方法
-    saveFile: function(file, callback) {
-        callback = callback || function() {
+    saveFile: function (file, callback) {
+
+        callback = callback || function () {
         };
         var data = $('#main_area').html();
         var writeOption = {
@@ -32,15 +33,23 @@ var Adolfans = {
         try {
             fs.writeFileSync(file, '\ufeff' + data, writeOption);
         } catch (err) {
-            dialog.display("An error happened when saving the document:" + err + ", If you are not sure the meaning, please contact the developer.", false, "ync", function() {
+            dialog.display("An error happened when saving the document:" + err + ", If you are not sure the meaning, please contact the developer.", false, "ync", function () {
             });
             that.error = true;
         }
+
+        documentIsFile = true;
+        documentChanged = false;
+        documentSavedAction = true;
+        firstDocumentChange = true;
+        Adolfans.refreshObserver();
+        windows.refreshTitle();
+
         if (!error)
             callback();
     },
     //刷新监控器方法
-    refreshObserver: function() {
+    refreshObserver: function () {
         DocumentObserver.disconnect();
         DocumentObserver.observe(mainArea, DocumentObserverConfig);
     },
@@ -52,7 +61,7 @@ var Adolfans = {
         autosave: false,
         autosaveTime: 30
     },
-    readSettingFile: function() {
+    readSettingFile: function () {
         var SettingFileLocation = this.settingFilePath + this.settingFile;
         if (fs.existsSync(SettingFileLocation)) {
             this.settingOptions = JSON.parse(fs.readFileSync(SettingFileLocation).toString());
@@ -61,16 +70,38 @@ var Adolfans = {
             this.writeSettingFile();
         }
     },
-    writeSettingFile: function(isDefault) {
+    writeSettingFile: function (options) {
         var optObject;
-        isDefault = typeof (isDefault) == 'undefined' ? true : isDefault;
-        if (isDefault) {
+        Adolfans.settingOptions = JSON.parse(JSON.stringify(options));
+
+        options = typeof (options) == 'undefined' ? false : options;
+        if (!options) {
             optObject = this.defaultSettingOptions;
         } else {
             optObject = Adolfans.settingOptions;
         }
         var SettingFileLocation = this.settingFilePath + this.settingFile;
         var settingJSONString = JSON.stringify(optObject);
+
         fs.writeFileSync(SettingFileLocation, settingJSONString);
+    },
+    applySettingFile: function () {
+        Adolfans.readSettingFile();
+
+        //自动保存设置部分
+        var _CACHE_;
+        _CACHE_ = {intervalEvent: null, intervalStatus: true};
+        if (Adolfans.settingOptions.autosave) {
+            _CACHE_.intervalEvent = setInterval(function () {
+                if (documentIsFile)
+                    Adolfans.saveFile($("#open_dialog").val());
+            }, Adolfans.settingOptions.autosaveTime * 1000);
+            _CACHE_.intervalStatus = true;
+        } else {
+            if (_CACHE_.intervalEvent) {
+                document.clearInterval(_CACHE_.intervalEvent);
+                _CACHE_.intervalStatus = false;
+            }
+        }
     }
 };
