@@ -124,6 +124,10 @@ $(document).ready(function() {
         $("#navigator_arror").css({"opacity": "0", "right": "0"});
 
     });
+
+    document.querySelector("#main_area").addEventListener("mousewheel",function(){
+
+    });
     ////////////////////////////////////////////////////////////////////////////////
     //文件操作类事件
     ////////////////////////////////////////////////////////////////////////////////
@@ -151,12 +155,6 @@ $(document).ready(function() {
     //打开事件监听
     $("#open_dialog").bind('change', function() {
         Adolfans.openFile($("#open_dialog").val());
-        filePath = $("#open_dialog").val();
-        documentIsFile = true;
-        documentChanged = false;
-        firstDocumentChange = true;
-        Adolfans.refreshObserver();
-        windows.refreshTitle();
     });
 
     //保存快捷键

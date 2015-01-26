@@ -15,6 +15,13 @@ var Adolfans = {
                 }
                 var content = data;
                 $('#main_area').html(content);
+
+                filePath = $("#open_dialog").val();
+                documentIsFile = true;
+                documentChanged = false;
+                firstDocumentChange = true;
+                Adolfans.refreshObserver();
+                windows.refreshTitle();
             });
         }
     },
