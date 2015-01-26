@@ -162,7 +162,7 @@ $(document).ready(function() {
     //保存快捷键
     $(document).bind('keydown', 'Ctrl+s', function(evt) {
         if (documentIsFile)
-            Adolfans.saveFile(filePath);
+            Adolfans.saveFile($("#save_dialog").val());
         else {
             $("#save_dialog").click();
         }
