@@ -21,6 +21,7 @@ var Adolfans = {
                 documentChanged = false;
                 firstDocumentChange = true;
                 Adolfans.refreshObserver();
+                windows.refreshCount();
                 windows.refreshTitle();
             });
         }

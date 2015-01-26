@@ -5,9 +5,9 @@
 
 var windows = {
     //这个方法我已经不想再去动它了，警告，不要动这个方法，太特么恶心了
-    saveCheck: function(actionContinue) {
+    saveCheck: function (actionContinue) {
         if (documentChanged) {
-            dialog.display("Save the document?", false, "ync", function(dialogReturn) {
+            dialog.display("Save the document?", false, "ync", function (dialogReturn) {
                 if (typeof (dialogReturn) === "boolean") {
                     if (dialogReturn) {
                         if (documentIsFile)
@@ -24,7 +24,7 @@ var windows = {
         }
         return false;
     },
-    refreshTitle: function() {
+    refreshTitle: function () {
         console.log(filePath);
         if (documentIsFile)
             var windowTitle = regex.FileURl(filePath);
@@ -35,6 +35,10 @@ var windows = {
             windowTitle = "<b>" + windowTitle + "</b>";
 
         $("#my_adolfans").html(windowTitle);
+    },
+    refreshCount: function () {
+        var count = $("#main_area").text().length;
+        $("#counter_words").html(count);
     },
     settingWindow: {}
 };

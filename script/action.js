@@ -183,8 +183,7 @@ $(document).ready(function() {
     MutationObserver = window.MutationObserver;
     DocumentObserver = new MutationObserver(function(e) {
         documentChanged = true;
-        var count = $("#main_area").text().length;
-        $("#counter_words").html(count);
+        windows.refreshCount();
         //更新标题栏
         if (firstDocumentChange)
             windows.refreshTitle();
