@@ -7,11 +7,6 @@
 //窗体类事件
 ////////////////////////////////////////////////////////////////////////////////   
 
-//打开开发人员窗口
-$(document).bind('keydown', 'f12', function(evt) {
-    win.showDevTools();
-});
-
 //监视窗口关闭行为
 win.on('close', function() {
     var that = this;
@@ -40,7 +35,7 @@ $(document).ready(function() {
     //呼出菜单
     $("header").on({
         'click': function() {
-            var win = gui.Window.open('about.html', {
+            wm.open('about.html', {
                 position: 'center',
                 "toolbar": false,
                 "frame": false,
@@ -49,7 +44,7 @@ $(document).ready(function() {
             });
         },
         'contextmenu': function() {
-            windows.settingWindow = gui.Window.open('settings.html', {
+            windows.settingWindow = wm.open('settings.html', {
                 position: 'center',
                 "toolbar": false,
                 "frame": false,
@@ -173,12 +168,6 @@ $(document).ready(function() {
             filePath = $("#save_dialog").val();
         }
 
-        documentIsFile = true;
-        documentChanged = false;
-        documentSavedAction = true;
-        firstDocumentChange = true;
-        Adolfans.refreshObserver();
-        windows.refreshTitle();
         evt.preventDefault();
         return false;
     });
