@@ -8,14 +8,14 @@
 ////////////////////////////////////////////////////////////////////////////////   
 
 //监视窗口关闭行为
-win.on('close', function() {
+win.on('close', function () {
     var that = this;
     if (documentChanged) {
-        dialog.display("You have changed the document,save it before exit?", false, "ync", function(dialogReturn) {
+        dialog.display("You have changed the document,save it before exit?", false, "ync", function (dialogReturn) {
             if (typeof (dialogReturn) === "boolean") {
                 if (dialogReturn) {
                     if (documentIsFile) {
-                        Adolfans.saveFile($("#open_dialog").val(), function() {
+                        Adolfans.saveFile($("#open_dialog").val(), function () {
                             that.close(true);
                         });
                     } else {
@@ -31,10 +31,10 @@ win.on('close', function() {
     }
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
     //呼出菜单
     $("header").on({
-        'click': function() {
+        'click': function () {
             wm.open('about.html', {
                 position: 'center',
                 "toolbar": false,
@@ -43,7 +43,7 @@ $(document).ready(function() {
                 height: 452
             });
         },
-        'contextmenu': function() {
+        'contextmenu': function () {
             windows.settingWindow = wm.open('settings.html', {
                 position: 'center',
                 "toolbar": false,
@@ -55,7 +55,7 @@ $(document).ready(function() {
     });
     //全屏事件
 
-    $("#full_screen").on('click', function() {
+    $("#full_screen").on('click', function () {
         if (win.isFullscreen) {
             clearTimeout(fullScreenTimeoutEvent);
             win.leaveFullscreen();
@@ -68,12 +68,12 @@ $(document).ready(function() {
             $("header,#title_drag_area").addClass("fulled");
             $(this).addClass("fulled");
             $("#title_drag_area").on({
-                "mouseover": function() {
+                "mouseover": function () {
                     clearTimeout(fullScreenTimeoutEvent);
                     $("header").removeClass("fulled");
                 },
-                "mouseleave": function() {
-                    fullScreenTimeoutEvent = setTimeout(function() {
+                "mouseleave": function () {
+                    fullScreenTimeoutEvent = setTimeout(function () {
                         $("header").addClass("fulled");
                     }, 1000);
                 }
@@ -82,28 +82,34 @@ $(document).ready(function() {
     });
 
     //窗口关闭按钮
-    $("#close").on('click', function() {
+    $("#close").on('click', function () {
         win.close();
     });
 
     //绑定滑入热区事件
-    $("#navigator_hotarea").on("mouseover", function() {
-        if (($("#main_area")[0].scrollHeight - $(document).height()) !== 0) {
-            var mainAreaScrollPositionPercent = $("#main_area").scrollTop() / ($("#main_area")[0].scrollHeight - $(document).height());
-            var arrorPosition = (($("#navigator_hotarea").height() - 50) * mainAreaScrollPositionPercent) + 50;
-            $("#navigator_arror").css({"top": arrorPosition + "px", "opacity": "1", "right": "5px"});
-        }
-    });
+    $("#navigator_hotarea").on("mouseover", windows.showPosition);
 
-    $("#navigator_hotarea").on("mouseleave", function() {
-        if (!arrorDraging)
-            $("#navigator_arror").css({"opacity": "0", "right": "0px"});
+    $("#navigator_hotarea").on("mouseleave", windows.hidePosition);
+
+    $("#navigator_hotarea").on("click", function (event) {
+        var mainAreaScrollPositionPercent = (event.offsetY) / ($(this).height() - 50 );
+        var arrorPosition = (($("#navigator_hotarea").height() - 50) * mainAreaScrollPositionPercent) + 50;
+        var arrorPositionPercent = (arrorPosition - 50) / ($("#navigator_hotarea").height() - 50);
+        var arrorScrollPosition = ($("#main_area")[0].scrollHeight - $(document).height()) * arrorPositionPercent;
+
+        $("#navigator_arror").css({"top": arrorPosition + "px", "opacity": "1", "right": "5px"});
+        $("#main_area").scrollTop(arrorScrollPosition);
+
+        if (windows._CACHE_.scrollTimeout)
+            clearTimeout(windows._CACHE_.scrollTimeout);
+
+        windows._CACHE_.scrollTimeout = setTimeout(windows.hidePosition, 1000);
     });
 
     //这俩是滚针事件
-    $("#navigator_arror").on("mousedown", function() {
+    $("#navigator_arror").on("mousedown", function () {
         arrorDraging = true;
-        $(document).on("mousemove", function(evt) {
+        $(document).on("mousemove", function (evt) {
             screenPosition.y = evt.pageY;
             if (screenPosition.y < 50)
                 arrowY = 50;
@@ -118,23 +124,26 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on("mouseup", function() {
+    $(document).on("mouseup", function () {
         arrorDraging = false;
         $(document).off("mousemove");
         $("#navigator_arror").css({"opacity": "0", "right": "0"});
-
     });
 
-    document.querySelector("#main_area").addEventListener("mousewheel",function(){
+    document.querySelector("#main_area").addEventListener("mousewheel", function () {
+        windows.showPosition();
+        if (windows._CACHE_.scrollTimeout)
+            clearTimeout(windows._CACHE_.scrollTimeout);
 
+        windows._CACHE_.scrollTimeout = setTimeout(windows.hidePosition, 1000);
     });
     ////////////////////////////////////////////////////////////////////////////////
     //文件操作类事件
     ////////////////////////////////////////////////////////////////////////////////
 
     //新建快捷键
-    $(document).bind('keydown', 'ctrl+n', function(evt) {
-        windows.saveCheck(function() {
+    $(document).bind('keydown', 'ctrl+n', function (evt) {
+        windows.saveCheck(function () {
             $("#main_area").html("");
             filePath = null;
             documentIsFile = false;
@@ -146,19 +155,19 @@ $(document).ready(function() {
     });
 
     //打开快捷键
-    $(document).bind('keydown', 'ctrl+o', function(evt) {
-        windows.saveCheck(function() {
+    $(document).bind('keydown', 'ctrl+o', function (evt) {
+        windows.saveCheck(function () {
             $("#open_dialog").click();
         });
     });
 
     //打开事件监听
-    $("#open_dialog").bind('change', function() {
+    $("#open_dialog").bind('change', function () {
         Adolfans.openFile($("#open_dialog").val());
     });
 
     //保存快捷键
-    $(document).bind('keydown', 'Ctrl+s', function(evt) {
+    $(document).bind('keydown', 'Ctrl+s', function (evt) {
         if (documentIsFile)
             Adolfans.saveFile(filePath);
         else {
@@ -170,7 +179,7 @@ $(document).ready(function() {
     });
 
     //保存事件监听
-    $("#save_dialog").bind('change', function() {
+    $("#save_dialog").bind('change', function () {
         filePath = $("#save_dialog").val();
         Adolfans.saveFile($("#save_dialog").val());
     });
@@ -181,7 +190,7 @@ $(document).ready(function() {
     //文档状态监听,顺便更新字数统计，再顺便更新下标题栏
 
     MutationObserver = window.MutationObserver;
-    DocumentObserver = new MutationObserver(function(e) {
+    DocumentObserver = new MutationObserver(function (e) {
         documentChanged = true;
         windows.refreshCount();
         //更新标题栏
@@ -199,7 +208,7 @@ $(document).ready(function() {
     ////////////////////////////////////////////////////////////////////////////////
 
     //监视粘贴行为并对将要粘贴的内容进行格式化
-    mainArea.addEventListener("paste", function(e) {
+    mainArea.addEventListener("paste", function (e) {
         //开始数据处理
         var clipboard = e.clipboardData;
         var data = clipboard.getData('text/html');
@@ -215,13 +224,13 @@ $(document).ready(function() {
     });
 
     //纯文本粘贴
-    $(document).bind('keydown', 'Ctrl+Shift+V', function() {
+    $(document).bind('keydown', 'Ctrl+Shift+V', function () {
         var insertData = regex.formatClipboard();
         document.execCommand('inserthtml', false, insertData);
     });
 
     //呼出右键菜单
-    $("#main_area").bind("contextmenu", function(evt) {
+    $("#main_area").bind("contextmenu", function (evt) {
         var contentMenuX, contentMenuY;
         if (window.innerHeight < evt.pageY + 174)
             contentMenuY = evt.pageY - 174;
@@ -242,7 +251,7 @@ $(document).ready(function() {
     });
 
     //菜单消失
-    $(document).bind("click keydown", function() {
+    $(document).bind("click keydown", function () {
         if (actionSwitch.functionMenu === 1) {
             $("#menu_content").hide();
             actionSwitch.functionMenu = 0;
@@ -251,12 +260,12 @@ $(document).ready(function() {
 
     //呼出heading菜单
     $("#list_heading").on({
-        "mouseenter": function() {
-            timeoutEvent = setTimeout(function() {
+        "mouseenter": function () {
+            timeoutEvent = setTimeout(function () {
                 $("#list_style_heading").addClass("selected");
             }, 500);
         },
-        "mouseleave": function() {
+        "mouseleave": function () {
             clearTimeout(timeoutEvent);
             $("#list_style_heading").removeClass("selected");
         }
@@ -265,34 +274,34 @@ $(document).ready(function() {
 //-------------------------------------------------------------------------//
 //右键菜单内选项
 //-------------------------------------------------------------------------//   
-    $("#cut").click(function() {
+    $("#cut").click(function () {
         document.execCommand('cut', true, null);
     });
 
-    $("#copy").click(function() {
+    $("#copy").click(function () {
         document.execCommand('copy', true, null);
     });
 
-    $("#paste").click(function() {
+    $("#paste").click(function () {
         document.execCommand('paste', true, null);
     });
 
-    $("#clearFormat").click(function() {
+    $("#clearFormat").click(function () {
         document.execCommand('RemoveFormat', false, null);
     });
 
     //绑定一般格式功能
-    $("#bold").click(function() {
+    $("#bold").click(function () {
         document.execCommand('bold', true, null);
     });
 
-    $("#italic").click(function() {
+    $("#italic").click(function () {
         document.execCommand('italic', true, null);
     });
 
-    $("#link").click(function() {
+    $("#link").click(function () {
         mouse.getSelection();
-        dialog.display("Inupt the URL of the link you want to insert.", true, "cc", function(linkURl) {
+        dialog.display("Inupt the URL of the link you want to insert.", true, "cc", function (linkURl) {
             if (linkURl !== false) {
                 mouse.replaceSelection();
                 document.execCommand('CreateLink', false, linkURl);
@@ -301,37 +310,37 @@ $(document).ready(function() {
     });
 
     //绑定标题格式功能
-    $("#h1").click(function() {
+    $("#h1").click(function () {
         document.execCommand('formatBlock', true, "<h1>");
     });
 
-    $("#h2").click(function() {
+    $("#h2").click(function () {
         document.execCommand('formatBlock', true, "<h2>");
     });
 
-    $("#h3").click(function() {
+    $("#h3").click(function () {
         document.execCommand('formatBlock', true, "<h3>");
     });
 
-    $("#h4").click(function() {
+    $("#h4").click(function () {
         document.execCommand('formatBlock', true, "<h4>");
     });
 
-    $("#h5").click(function() {
+    $("#h5").click(function () {
         document.execCommand('formatBlock', true, "<h5>");
     });
 
-    $("#h6").click(function() {
+    $("#h6").click(function () {
         document.execCommand('formatBlock', true, "<h6>");
     });
 
     //绑定列表功能
 
-    $("#unordered_list").click(function() {
+    $("#unordered_list").click(function () {
         document.execCommand('InsertUnorderedList', true, "<h6>");
     });
 
-    $("#ordered_list").click(function() {
+    $("#ordered_list").click(function () {
         document.execCommand('InsertOrderedList', true, "<h6>");
     });
 });
