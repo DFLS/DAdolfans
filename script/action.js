@@ -165,7 +165,6 @@ $(document).ready(function() {
             Adolfans.saveFile($("#open_dialog").val());
         else {
             $("#save_dialog").click();
-            filePath = $("#save_dialog").val();
         }
 
         evt.preventDefault();
@@ -174,6 +173,7 @@ $(document).ready(function() {
 
     //保存事件监听
     $("#save_dialog").bind('change', function() {
+        filePath = $("#save_dialog").val();
         Adolfans.saveFile($("#save_dialog").val());
     });
 

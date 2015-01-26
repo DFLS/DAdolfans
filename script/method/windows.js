@@ -25,6 +25,7 @@ var windows = {
         return false;
     },
     refreshTitle: function() {
+        console.log(filePath);
         if (documentIsFile)
             var windowTitle = regex.FileURl(filePath);
         else

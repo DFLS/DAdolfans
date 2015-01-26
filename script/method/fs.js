@@ -31,7 +31,8 @@ var Adolfans = {
         var that = this;
         var error = false;
         try {
-            fs.writeFileSync(file, '\ufeff' + data, writeOption);
+            //fs.writeFileSync(file, '\ufeff' + data, writeOption);    //谨以此行代码纪念那年把我折磨的痛不欲生的bug
+            fs.writeFileSync(file, data, writeOption);
         } catch (err) {
             dialog.display("An error happened when saving the document:" + err + ", If you are not sure the meaning, please contact the developer.", false, "ync", function () {
             });
