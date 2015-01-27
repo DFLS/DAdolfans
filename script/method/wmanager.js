@@ -22,6 +22,17 @@ var wm = {
     },
 
     cp: function (func) {
-        func(wm.parentWindow);
+        var n = 0;
+        var loadEv = setInterval(function () {
+            if (wm.parentWindow !== null) {
+                clearInterval(loadEv);
+                func(wm.parentWindow);
+            }
+            else if (n > 100)
+                console.error("Read Parent Window Timeout");
+            else
+                n++;
+        }, 10);
+
     }
 }

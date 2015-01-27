@@ -11,11 +11,11 @@ var panel = {
         });
     },
     readSettings: function () {
-        setTimeout(function () {
+        wm.cp(function (p) {
             $("#autosavetime").val(wm.parentWindow.Adolfans.settingOptions.autosaveTime);
             if (wm.parentWindow.Adolfans.settingOptions.autosave)
                 $("#autosave").attr("checked", "checked");
-        }, 10);
+        });
     }
 };
 
