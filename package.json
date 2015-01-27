@@ -2,8 +2,8 @@
     "main": "index.html",
     "name": "DAdolfans",
     "description": "A simple app for writing articles.",
-    "version": "0.0.6 pre Alpha",
-    "keywords": ["prealpha", "DAdolfans", "writing", "editor"],
+    "version": "0.0.7 Alpha",
+    "keywords": ["alpha", "DAdolfans", "writing", "editor"],
     "window": {
         "title": "DAdolfans",
         "icon": "da.ico",
