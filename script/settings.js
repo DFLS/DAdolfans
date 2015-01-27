@@ -4,23 +4,22 @@ var panel = {
             var options = {
                 autosave: $("#autosave").is(":checked"),
                 autosaveTime: $("#autosavetime").val()
-            }
+            };
 
             p.Adolfans.writeSettingFile(options);
-
             p.Adolfans.applySettingFile(true);
         });
     },
     readSettings: function () {
-        $("#autosavetime").val(Adolfans.settingOptions.autosavetime);
-        if (Adolfans.settingOptions.autosave)
-            $("#autosave").attr("checked", "checked");
+        setTimeout(function () {
+            $("#autosavetime").val(wm.parentWindow.Adolfans.settingOptions.autosaveTime);
+            if (wm.parentWindow.Adolfans.settingOptions.autosave)
+                $("#autosave").attr("checked", "checked");
+        }, 10);
     }
 };
 
 $(document).ready(function () {
-    panel.readSettings();
-
     $("input[type='text']").on("blur", function () {
         panel.collectSettings();
     });
@@ -32,4 +31,6 @@ $(document).ready(function () {
     $("#close_icon").on("click", function () {
         win.close(true);
     });
+
+    panel.readSettings();
 });

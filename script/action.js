@@ -377,4 +377,7 @@ $(document).ready(function () {
     $("#ordered_list").click(function () {
         document.execCommand('InsertOrderedList', true, "<h6>");
     });
+
+    //读取系统设置
+    Adolfans.applySettingFile();
 });

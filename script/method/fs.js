@@ -71,27 +71,22 @@ var Adolfans = {
         autosaveTime: 30
     },
     readSettingFile: function () {
-        var SettingFileLocation = this.settingFilePath + this.settingFile;
+        var SettingFileLocation = Adolfans.settingFilePath + Adolfans.settingFile;
         if (fs.existsSync(SettingFileLocation)) {
-            this.settingOptions = JSON.parse(fs.readFileSync(SettingFileLocation).toString());
+            Adolfans.settingOptions = JSON.parse(fs.readFileSync(SettingFileLocation).toString());
         } else {
-            this.settingOptions = this.defaultSettingOptions;
-            this.writeSettingFile();
+            Adolfans.writeSettingFile();
         }
     },
     writeSettingFile: function (options) {
-        var optObject;
+        options = typeof (options) == 'undefined' ? Adolfans.defaultSettingOptions : options;
         Adolfans.settingOptions = JSON.parse(JSON.stringify(options));
 
-        options = typeof (options) == 'undefined' ? false : options;
-        if (!options) {
-            optObject = this.defaultSettingOptions;
-        } else {
-            optObject = Adolfans.settingOptions;
-        }
-        var SettingFileLocation = this.settingFilePath + this.settingFile;
-        var settingJSONString = JSON.stringify(optObject);
+        var SettingFileLocation = Adolfans.settingFilePath + Adolfans.settingFile;
+        var settingJSONString = JSON.stringify(options);
 
+        if (!fs.existsSync(Adolfans.settingFilePath))
+            fs.mkdirSync(Adolfans.settingFilePath);
         fs.writeFileSync(SettingFileLocation, settingJSONString);
     },
     applySettingFile: function () {
