@@ -200,6 +200,35 @@ $(document).ready(function () {
         Adolfans.openFile($("#open_dialog").val());
     });
 
+    //拖拽文件打开代码
+    document.querySelector("#main_area").addEventListener("dragenter", function (event) {
+        $("#drag_open").addClass("enter");
+        event.stopPropagation();
+        event.preventDefault();
+    });
+    document.querySelector("#main_area").addEventListener("dragover", function (event) {
+        event.stopPropagation();
+        event.preventDefault();
+    });
+    document.querySelector("#main_area").addEventListener("dragleave", function (event) {
+        $("#drag_open").addClass("leaving");
+        setTimeout(function(){
+            $("#drag_open").removeClass("leaving enter");
+        },200);
+        event.stopPropagation();
+        event.preventDefault();
+    });
+    document.querySelector("#main_area").addEventListener("drop", function (event) {
+        $("#drag_open").addClass("leaving");
+        setTimeout(function(){
+            $("#drag_open").removeClass("leaving enter");
+        },200);
+        Adolfans.openFile(event.dataTransfer.files[0].path);
+        event.stopPropagation();
+        event.preventDefault();
+    });
+
+
     //保存快捷键
     $(document).bind('keydown', 'Ctrl+s', function (evt) {
         if (documentIsFile)

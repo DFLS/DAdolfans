@@ -7,420 +7,505 @@
     Author     : Losses
 */
 
-@editor-top:50px;
+@editor-top: 50px;
 
-@menu-width:165px;
-@icon-size:30px;
+@menu-width: 165px;
+@icon-size: 30px;
 
-.border{
-    border:1px solid #bebebe;
+.border {
+  border: 1px solid #bebebe;
 }
 
-.border_active{
-    border:1px solid #a8a8a8;
+.border_active {
+  border: 1px solid #a8a8a8;
 }
 
-.ui{
-    .border;
-    background:rgba(255,255,255,0.98);
-    border-radius:1px;
-    box-shadow:0 0 6px #d1d1d1;
+.ui {
+  .border;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 1px;
+  box-shadow: 0 0 6px #d1d1d1;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 //通用样式
 ////////////////////////////////////////////////////////////////////////////////
 
-*{
-    margin:0;
-    padding:0;
-    outline:none;
-    -webkit-user-select:none;
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  -webkit-user-select: none;
 }
 
-ul{
-    list-style: none;
+ul {
+  list-style: none;
 }
 
 li button {
-    border:0;
+  border: 0;
 }
 
-.icon{
-    transition: all 0.1s ease-in-out;
+.icon {
+  transition: all 0.1s ease-in-out;
 }
 
 ::-webkit-scrollbar {
-    width: 0px;
+  width: 0px;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 //窗体样式
 ////////////////////////////////////////////////////////////////////////////////
 
-header{
-    width:100%;
-    height:30px;
-    background:no-repeat rgba(255,255,255,0.8);
-    background-image: url(../image/logo.png);
-    background-size:30px 30px;
-    color:#7d7d7d;
-    font:13px/30px sans-serif;
-    text-align: center;
-    box-shadow:0 3px 3px rgba(0,0,0,0.2);
-    position:fixed;
-    z-index:3;
-    transition: all 0.3s ease-in-out;
-    -webkit-user-select:none;
+header {
+  width: 100%;
+  height: 30px;
+  background: no-repeat rgba(255, 255, 255, 0.8);
+  background-image: url(../image/logo.png);
+  background-size: 30px 30px;
+  color: #7d7d7d;
+  font: 13px/30px sans-serif;
+  text-align: center;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  z-index: 3;
+  transition: all 0.3s ease-in-out;
+  -webkit-user-select: none;
 }
 
-header.fulled{
-    margin-top:-30px;
+header.fulled {
+  margin-top: -30px;
 }
 
-#title_drag_area{
-    top:0;
-    left:30px;
-    width:~"-webkit-calc( 100% - 78px )";
-    height:30px;
-    position:fixed;
-    -webkit-app-region: drag;
+#title_drag_area {
+  top: 0;
+  left: 30px;
+  width: ~"-webkit-calc( 100% - 78px )";
+  height: 30px;
+  position: fixed;
+  -webkit-app-region: drag;
 }
 
-#title_drag_area.fulled{
-    -webkit-app-region: no-drag;
-    z-index:9;
+#title_drag_area.fulled {
+  -webkit-app-region: no-drag;
+  z-index: 9;
 }
 
-#iconset{
-    right:0;
-    position:absolute;
-    z-index:10;
-    margin:6px;
+#iconset {
+  right: 0;
+  position: absolute;
+  z-index: 10;
+  margin: 6px;
 
-    >.icon{
-        width:18px;
-        height:18px;
-        margin:0 0 0 5px;
-        display:inline-block;
-    }
+  > .icon {
+    width: 18px;
+    height: 18px;
+    margin: 0 0 0 5px;
+    display: inline-block;
+  }
 
-    >.icon:hover{
-        opacity:0.8;
-    }
+  > .icon:hover {
+    opacity: 0.8;
+  }
 
-    >.icon:active{
-        opacity:0.9;
-    }
+  > .icon:active {
+    opacity: 0.9;
+  }
 
-    #close{
-        background: url(../image/close.png);
-    }
+  #close {
+    background: url(../image/close.png);
+  }
 
-    #full_screen{
-        background: url(../image/fullscreen.png);
-    }
+  #full_screen {
+    background: url(../image/fullscreen.png);
+  }
 
-    #full_screen.fulled{
-        -webkit-transform:rotate(180deg);
-    }
+  #full_screen.fulled {
+    -webkit-transform: rotate(180deg);
+  }
 }
 
-#main_area{
-    left:50%;
-    width:40em;
-    height:~"-webkit-calc(100% -" @editor-top ~")";
-    border:0;
-    padding:@editor-top 0 0 0;
-    margin-left:-20em;
-    font:15px/30px "microsoft yahei";
-    overflow-y: scroll;
-    position:absolute;
-    z-index:1;
-    resize: none;
-    ul li{
-        list-style:square inside;
-    }
-    ol li{
-        list-style:decimal inside;
-    }
+#main_area {
+  left: 50%;
+  width: 40em;
+  height: ~"-webkit-calc(100% -" @editor-top ~")";
+  border: 0;
+  padding: @editor-top 0 0 0;
+  margin-left: -20em;
+  font: 15px/30px "microsoft yahei";
+  overflow-y: scroll;
+  position: absolute;
+  z-index: 1;
+  resize: none;
+  ul li {
+    list-style: square inside;
+  }
+  ol li {
+    list-style: decimal inside;
+  }
 }
 
-#frame{
-    bottom:0;
-    left:0;
-    width:~"-webkit-calc( 100% - 2px )";
-    height:~"-webkit-calc( 100% - 2px )";
-    border:1px solid rgba(0,0,0,0.1); 
-    position:fixed;
+#frame {
+  bottom: 0;
+  left: 0;
+  width: ~"-webkit-calc( 100% - 2px )";
+  height: ~"-webkit-calc( 100% - 2px )";
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  position: fixed;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 //导航器
 ////////////////////////////////////////////////////////////////////////////////
 
-#navigator_hotarea{
-    top:@editor-top;
-    right:0;
-    width:34px;
-    height:~"-webkit-calc(100% -" @editor-top~")";
-    position:fixed;
-    z-index:7;
+#navigator_hotarea {
+  top: @editor-top;
+  right: 0;
+  width: 34px;
+  height: ~"-webkit-calc(100% -" @editor-top~")";
+  position: fixed;
+  z-index: 7;
 
-    #navigator_arror{
-        top:50px;
-        right:0;
-        width:34px;
-        height:28px;
-        margin-top:-14px;
-        background:url(../image/arrow.png);
-        position:fixed;
-        opacity: 0;
-        transition-property:opacity,right,top;
-        transition-duration:0.2s;
-        transition-timing-function:ease-in-out;
-    }
+  #navigator_arror {
+    top: 50px;
+    right: 0;
+    width: 34px;
+    height: 28px;
+    margin-top: -14px;
+    background: url(../image/arrow.png);
+    position: fixed;
+    opacity: 0;
+    transition-property: opacity, right, top;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+  }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 //右键菜单
 ////////////////////////////////////////////////////////////////////////////////
 
-.menu{
-    .ui;
-    font:13px/30px "microsoft yahei";
-    position:fixed;
-    display:none;
-    cursor:default;
-    //-webkit-user-select:none;
-    z-index:3;
-    .icon{
-        width:@icon-size;
-        height:@icon-size;
-        margin:3px 5px;
-    }
+.menu {
+  .ui;
+  font: 13px/30px "microsoft yahei";
+  position: fixed;
+  display: none;
+  cursor: default;
+  //-webkit-user-select:none;
+  z-index: 3;
+  .icon {
+    width: @icon-size;
+    height: @icon-size;
+    margin: 3px 5px;
+  }
 
-    .icon:hover{
-        -webkit-filter:brightness(25%);
-    }
-    
-    #list_list .icon,
-    #heading_list .icon{
-        width:100%;
-        height:40px;
-        margin:0;
-        background:none;
-        color:#555;
-        font-weight:bold;
-    }
-    
-    .line{
-        width:168px;
-        height:0px;
-        margin:0 2px;
-        border-top:1px solid #c1c1c1;
-        clear:both;
-        display:block;
-    }
-    li,a{
-        float:left;
-    }
+  .icon:hover {
+    -webkit-filter: brightness(25%);
+  }
+
+  #list_list .icon,
+  #heading_list .icon {
+    width: 100%;
+    height: 40px;
+    margin: 0;
+    background: none;
+    color: #555;
+    font-weight: bold;
+  }
+
+  .line {
+    width: 168px;
+    height: 0px;
+    margin: 0 2px;
+    border-top: 1px solid #c1c1c1;
+    clear: both;
+    display: block;
+  }
+  li, a {
+    float: left;
+  }
 }
 
-#menu_main{
-    display:none;
+#menu_main {
+  display: none;
 }
 
-.menu_line_item{
-    height:40px;
-    overflow:hidden;
+.menu_line_item {
+  height: 40px;
+  overflow: hidden;
 }
 
-.menu_line_item:hover{
-    background:#f4f8ff;
+.menu_line_item:hover {
+  background: #f4f8ff;
 }
 
-#menu_content{
-    width:172px;
-    #menu_function{
-        #copy{ 
-            background:url(../image/copy.png);
-        } 
-        #cut{ 
-            background:url(../image/cut.png);
-        } 
-        #paste{
-            background:url(../image/paste.png);
-        } 
-        #clearFormat{ 
-            background:url(../image/clearformat.png);
-        } 
+#menu_content {
+  width: 172px;
+  #menu_function {
+    #copy {
+      background: url(../image/copy.png);
     }
+    #cut {
+      background: url(../image/cut.png);
+    }
+    #paste {
+      background: url(../image/paste.png);
+    }
+    #clearFormat {
+      background: url(../image/clearformat.png);
+    }
+  }
 
-    #menu_format{
-        #bold{
-            background:url(../image/bold.png);
-        } 
-        #italic{ 
-            background:url(../image/italic.png);
-        } 
-        #code{ 
-            background:url(../image/code.png);
-        } 
-        #link{ 
-            background:url(../image/link.png);
-        } 
-        #list_heading{
-            width:172px;
-            height:40px;
-            overflow:hidden;
-            #list_style_heading{
-                width:172px;
-                line-height:40px;
-                padding:0 0 0 10px;
-                float:left;
-                transition: all 0.2s ease-in-out;
-                display:inline-block;
-            }
-            #list_style_heading.selected{
-                transition: all 0.2s ease-in-out;
-                margin-left:-190px;
-            }
-            #list_heading{
-                width:172px;
-            }
-            #heading_list{
-                width:172px;
-                height:40px;
-                li{
-                    width:31px;
-                    height:40px;
-                    display:inline-block;
-                }
-                button{
-                    width:31px;
-                    height:40px;
-                    background:none;
-                }
-            }
-            ul{
-                .list{
-                    width:~"-webkit-clac(100% - 25px)";
-                    height:0;
-                    overflow:hidden;
-                    float:none;
-                    display:block;
-                }
-            }
+  #menu_format {
+    #bold {
+      background: url(../image/bold.png);
+    }
+    #italic {
+      background: url(../image/italic.png);
+    }
+    #code {
+      background: url(../image/code.png);
+    }
+    #link {
+      background: url(../image/link.png);
+    }
+    #list_heading {
+      width: 172px;
+      height: 40px;
+      overflow: hidden;
+      #list_style_heading {
+        width: 172px;
+        line-height: 40px;
+        padding: 0 0 0 10px;
+        float: left;
+        transition: all 0.2s ease-in-out;
+        display: inline-block;
+      }
+      #list_style_heading.selected {
+        transition: all 0.2s ease-in-out;
+        margin-left: -190px;
+      }
+      #list_heading {
+        width: 172px;
+      }
+      #heading_list {
+        width: 172px;
+        height: 40px;
+        li {
+          width: 31px;
+          height: 40px;
+          display: inline-block;
         }
-        #list_list{
-            line-height:40px;
-            display:block;
-            li{
-                width:70px;
-                margin:0 5px;
-            }
+        button {
+          width: 31px;
+          height: 40px;
+          background: none;
         }
+      }
+      ul {
+        .list {
+          width: ~"-webkit-clac(100% - 25px)";
+          height: 0;
+          overflow: hidden;
+          float: none;
+          display: block;
+        }
+      }
     }
-    .style{
-        width:100%;
+    #list_list {
+      line-height: 40px;
+      display: block;
+      li {
+        width: 70px;
+        margin: 0 5px;
+      }
     }
+  }
+  .style {
+    width: 100%;
+  }
 }
 
-#counter{
-    right:10px;
-    bottom:10px;
-    font:10px/20px serif;
-    color:gray;
-    position:fixed;
+#counter {
+  right: 10px;
+  bottom: 10px;
+  font: 10px/20px serif;
+  color: gray;
+  position: fixed;
 }
+
+@-webkit-keyframes breath {
+  from {
+    -webkit-transform: scale(1, 1);
+  }
+  to {
+    -webkit-transform: scale(0.9, 0.9);
+  }
+}
+
+@-webkit-keyframes _breath {
+  from {
+    -webkit-transform: scale(0.9, 0.9);
+  }
+  to {
+    -webkit-transform: scale(1, 1);
+  }
+}
+
+@-webkit-keyframes enter {
+  from {
+    -webkit-transform: scale(0, 0);
+  }
+  to {
+    -webkit-transform: scale(1, 1);
+  }
+}
+
+@-webkit-keyframes leaving {
+  from {
+    -webkit-transform: scale(1, 1);
+  }
+  to {
+    -webkit-transform: scale(0, 0);
+  }
+}
+
+#drag_open {
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  margin: -200px 0 0 -200px;
+  position: absolute;
+  z-index: -1;
+  display: none;
+
+  &::before {
+    content: '\feff';
+    left: 0;
+    right: 0;
+    width: 400px;
+    height: 400px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    -webkit-animation: breath 2s ease-in-out 0s infinite alternate;
+    position: absolute;
+    display: block;
+  }
+
+  &::after {
+    content: '\feff';
+    left: 75px;
+    top: 75px;
+    width: 250px;
+    height: 250px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    -webkit-animation: _breath 2s ease-in-out 0s infinite alternate;
+    position: absolute;
+    display: block;
+  }
+
+  &.enter {
+    display:block;
+    -webkit-animation: enter 300ms ease-out 0s 1 normal;
+  }
+
+  &.leaving {
+    display:block;
+    -webkit-animation: leaving 200ms ease-in 0s 1 normal;
+  }
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 //对话框样式
 ////////////////////////////////////////////////////////////////////////////////
 
-#dialog{
-    .ui;
-    left:50%;
-    top:50%;
-    width:500px;
-    margin:-100px 0 0 -250px;
-    position:fixed;
-    z-index:5;
-    -webkit-user-select:none;
+#dialog {
+  .ui;
+  left: 50%;
+  top: 50%;
+  width: 500px;
+  margin: -100px 0 0 -250px;
+  position: fixed;
+  z-index: 5;
+  -webkit-user-select: none;
 
-    #dialog_title{
-        text-align:center;
-        margin: 40px 10px 10px 10px;
+  #dialog_title {
+    text-align: center;
+    margin: 40px 10px 10px 10px;
+  }
+
+  #dialog_input {
+    margin: 10px;
+    padding: 5px;
+    width: 465px;
+    .border;
+    box-shadow: 0 2px 2px #c7c7c7 inset;
+  }
+
+  #dialog_input:active {
+    .border_active;
+  }
+
+  #buttons {
+    margin: 18px 0 0 0;
+    text-align: center;
+
+    button {
+      width: 70px;
+      height: 30px;
+      background: white;
+      .border;
+      border-radius: 2px;
     }
 
-    #dialog_input{
-        margin:10px;
-        padding:5px;
-        width:465px;
-        .border;
-        box-shadow: 0 2px 2px #c7c7c7 inset;
+    button:hover {
+      .border_active;
     }
 
-    #dialog_input:active{
-        .border_active;
+    button:active {
+      background: #ebebeb;
     }
 
-    #buttons{
-        margin:18px 0 0 0;
-        text-align:center;
-
-        button{
-            width:70px;
-            height:30px;
-            background:white;
-            .border;
-            border-radius:2px;
-        }
-
-        button:hover{
-            .border_active;
-        }
-
-        button:active{
-            background:#ebebeb;
-        }
-
-        .default{
-            background: #0066ff;
-            color:white;
-            border:1px solid #0050c9;
-            font-weight: bold;
-        }
-
-        .default:hover{
-            border:1px solid #0059df;
-        }
-
-        .default:active {
-            background:darken(#0066ff,5%);
-        }
+    .default {
+      background: #0066ff;
+      color: white;
+      border: 1px solid #0050c9;
+      font-weight: bold;
     }
+
+    .default:hover {
+      border: 1px solid #0059df;
+    }
+
+    .default:active {
+      background: darken(#0066ff, 5%);
+    }
+  }
 }
 
-.with_input{
-    height:200px;
+.with_input {
+  height: 200px;
 }
 
-.without_input{
-    height:155px;
+.without_input {
+  height: 155px;
 }
 
-#dialog>#buttons>#yes,
-#dialog>#buttons>#no,
-#dialog>#buttons>#cancel,
-#dialog>#buttons>#confirm,
-#dialog>#dialog_input,
-#dialog{
-    display:none;
+#dialog > #buttons > #yes,
+#dialog > #buttons > #no,
+#dialog > #buttons > #cancel,
+#dialog > #buttons > #confirm,
+#dialog > #dialog_input,
+#dialog {
+  display: none;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 //羞羞的东西要藏起来>_<~~
 ////////////////////////////////////////////////////////////////////////////////
-#open_dialog,#save_dialog,#paste_bin{
-    display:none;
+#open_dialog, #save_dialog, #paste_bin {
+  display: none;
 }
