@@ -16,7 +16,7 @@ var Adolfans = {
                 var content = data;
                 $('#main_area').html(content);
 
-                filePath = $("#open_dialog").val();
+                filePath = file;
                 documentIsFile = true;
                 documentChanged = false;
                 firstDocumentChange = true;
