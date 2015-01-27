@@ -103,7 +103,7 @@ var Adolfans = {
         if (Adolfans.settingOptions.autosave) {
             _CACHE_.intervalEvent = setInterval(function () {
                 if (documentIsFile)
-                    Adolfans.saveFile($("#open_dialog").val());
+                    Adolfans.saveFile(filePath);
             }, Adolfans.settingOptions.autosaveTime * 1000);
             _CACHE_.intervalStatus = true;
         } else {
