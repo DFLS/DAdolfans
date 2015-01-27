@@ -108,6 +108,17 @@ $(document).ready(function () {
 
     //这俩是滚针事件
     $("#navigator_arror").on("mousedown", function () {
+        //此部分用于处理选区
+        windows._CACHE_.selection = getSelection();
+        windows._CACHE_.collapsed = windows._CACHE_.selection.isCollapsed;
+        windows._CACHE_.anchorNode = windows._CACHE_.selection.anchorNode;
+        windows._CACHE_.anchorOffset = windows._CACHE_.selection.anchorOffset;
+        windows._CACHE_.ranges = [];
+
+        for (var i = 0; i < windows._CACHE_.selection.rangeCount; i++)
+            windows._CACHE_.ranges.push(windows._CACHE_.selection.getRangeAt(i));
+
+        //此部分用于处理滚动
         arrorDraging = true;
         $(document).on("mousemove", function (evt) {
             screenPosition.y = evt.pageY;
@@ -120,15 +131,38 @@ $(document).ready(function () {
             var arrorPositionPercent = ($("#navigator_arror").position().top - 50) / ($("#navigator_hotarea").height() - 50);
             var arrorScrollPosition = ($("#main_area")[0].scrollHeight - $(document).height()) * arrorPositionPercent;
             $("#navigator_arror").css("top", arrowY + "px");
+
             $("#main_area").scrollTop(arrorScrollPosition);
+            windows._CACHE_.arrorScrollPosition = arrorScrollPosition;
+            windows._CACHE_.selection.removeAllRanges();
+        });
+
+        $(document).one("mouseup", function () {
+            //此部分用于处理选区
+            if (windows._CACHE_.collapsed)
+                getSelection().collapse(windows._CACHE_.anchorNode, windows._CACHE_.anchorOffset);
+            else {
+                windows._CACHE_.selection = getSelection();
+                windows._CACHE_.selection.removeAllRanges();
+                windows._CACHE_.ranges.forEach(
+                    function (e) {
+                        windows._CACHE_.selection.addRange(e);
+                    }
+                )
+            }
+            //滚动页面
+            setTimeout(function () {
+                $("#main_area").scrollTop(windows._CACHE_.arrorScrollPosition);
+                windows.showPosition();
+            }, 2);
+
+            //此部分用于处理滚动
+            arrorDraging = false;
+            $(document).off("mousemove");
+            $("#navigator_arror").css({"opacity": "0", "right": "0"});
         });
     });
 
-    $(document).on("mouseup", function () {
-        arrorDraging = false;
-        $(document).off("mousemove");
-        $("#navigator_arror").css({"opacity": "0", "right": "0"});
-    });
 
     document.querySelector("#main_area").addEventListener("mousewheel", function () {
         windows.showPosition();

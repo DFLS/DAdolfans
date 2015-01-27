@@ -4,7 +4,10 @@
  */
 
 var windows = {
-    _CACHE_: {},
+    _CACHE_: {
+        ranges: []
+    },
+
     //这个方法我已经不想再去动它了，警告，不要动这个方法，太特么恶心了
     saveCheck: function (actionContinue) {
         if (documentChanged) {
