@@ -212,17 +212,17 @@ $(document).ready(function () {
     });
     document.querySelector("#main_area").addEventListener("dragleave", function (event) {
         $("#drag_open").addClass("leaving");
-        setTimeout(function(){
+        setTimeout(function () {
             $("#drag_open").removeClass("leaving enter");
-        },200);
+        }, 200);
         event.stopPropagation();
         event.preventDefault();
     });
     document.querySelector("#main_area").addEventListener("drop", function (event) {
         $("#drag_open").addClass("leaving");
-        setTimeout(function(){
+        setTimeout(function () {
             $("#drag_open").removeClass("leaving enter");
-        },200);
+        }, 200);
         Adolfans.openFile(event.dataTransfer.files[0].path);
         event.stopPropagation();
         event.preventDefault();
