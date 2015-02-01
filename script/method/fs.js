@@ -107,5 +107,24 @@ var Adolfans = {
                 _CACHE_.intervalStatus = false;
             }
         }
+    download: function (url, location, callback) {
+        if (!location) {
+            if (!fs.existsSync("../tmp/"))
+                fs.mkdirSync("../tmp/");
+
+            location = "../tmp/" + regex.randomNum(5);
+        }
+
+        try {
+            var writer = fs.createWriteStream(location);
+            request(url).pipe(writer);
+
+            if (callback) {
+                console.log(writer);
+                writer.on("finish", callback(writer));
+            }
+        } catch (error) {
+            callback(false);
+        }
     }
 };
