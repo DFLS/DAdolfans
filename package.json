@@ -2,7 +2,7 @@
     "main": "index.html",
     "name": "DAdolfans",
     "description": "A simple app for writing articles.",
-    "version": "0.0.7 Alpha",
+    "version": "0.0.7",
     "keywords": ["alpha", "DAdolfans", "writing", "editor"],
     "window": {
         "title": "DAdolfans",
@@ -20,11 +20,14 @@
         "type": "CC BY-SA 3.0",
         "url": "https://creativecommons.org/licenses/by-sa/3.0/"
     },
-    "repositories":
+    "repository":
             {
                 "type": "git",
                 "url": "https://github.com/Losses/DAdolfans.git",
                 "path": "/"
-            }
-
+            },
+    "dependencies":{
+      "markdown":"0.5.0",
+      "request":"2.51.0"
+    }
 }

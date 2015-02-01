@@ -79,3 +79,6 @@ content.txt
 /style/about.css
 /style/main.css
 /style/settings.css
+
+#node.js lib
+/node_modules
