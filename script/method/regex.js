@@ -28,6 +28,7 @@ var regex = {
         },
         HTMLToMarkdown: function (nodes) {
             var footer = {link: [], image: []};
+            var _CACHE_ = {imageLength: 0};
             var rule = {
                 transform: {
                     sup: "^({{(!}})",
@@ -152,11 +153,15 @@ var regex = {
                         if (srcAttrib) {
                             if (srcAttrib.match("data:image")) {
                                 imageBase64 = srcAttrib;
+
+                                footer.image.push([imageBase64, altAttrib]);
+
+                                return "![G" + footer.image.length + "]" + "[" + altAttrib + "]";
                             } else {
                                 Adolfans.download(srcAttrib, false, function (event) {
                                     if (event) {
                                         var bitmap = fs.readFileSync(event.path);
-                                        imageBase64 = new Buffer(bitmap).toString('base64');
+                                        imageBase64 = "data:image;base64," + new Buffer(bitmap).toString('base64');
                                     } else {
                                         imageBase64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAlCAYAAADMdYB" +
                                         "5AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lm" +
@@ -173,12 +178,14 @@ var regex = {
                                         "K1JEmCkizBQRZooIM0WEmSLCzH+BMJ9yx41wX8rKxsK2+3vKhsEASEsBPyKBpEDc/QY0n8f3E8QeKgA" +
                                         "AAABJRU5ErkJggg==";
                                     }
+
+                                    footer.image.push([imageBase64, altAttrib]);
                                 });
+
+                                _CACHE_.imageLength++;
+
+                                return "![G" + _CACHE_.imageLength + "]" + "[" + altAttrib + "]";
                             }
-
-                            footer.image.push([imageBase64, altAttrib]);
-
-                            return "![G" + altAttrib + "]" + "[" + footer.image.length + "]";
                         }
                     },
                     listItem: function (node) {
@@ -343,18 +350,26 @@ var regex = {
                 footerResult += "\n\n";
             }
 
-            for (var g in footer.image) {
-                dtCount = parseInt(g) + 1;
-                footerResult += "[G" + dtCount + "]: " + footer.image[g][0];
+            var imageDownloadWaiter = setInterval(function () {
+                if (footer.image.length === _CACHE_.imageLength) {
 
-                if (footer.link[g][1]) {
-                    footerResult += "     \"" + footer.image[g][1] + "\"";
+                    console.log(footer.image.length, _CACHE_.imageLength, footer.image);
+                    for (var g in footer.image) {
+                        dtCount = parseInt(g) + 1;
+                        footerResult += "[G" + dtCount + "]: " + footer.image[g][0];
+
+                        if (footer.image[g][1]) {
+                            footerResult += "     \"" + footer.image[g][1] + "\"";
+                        }
+
+                        footerResult += "\n\n";
+                    }
+
+                    clearInterval(imageDownloadWaiter);
+
+                    return (bodyResult + footerResult);
                 }
-
-                footerResult += "\n\n";
-            }
-
-            console.log(bodyResult + footerResult);
+            }, 20);
         },
         FileURl: function (data) {
             //判断是否是*Unix操作系统
