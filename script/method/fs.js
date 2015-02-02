@@ -5,7 +5,7 @@
 
 //文件调用类库，豆娘是人类的真理！
 var Adolfans = {
-//文件打开方法
+    //文件打开方法
     openFile: function (file) {
         if (file !== "") {
             fs.readFile(file, 'utf8', function (err, data) {
