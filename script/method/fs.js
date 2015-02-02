@@ -116,14 +116,16 @@ var Adolfans = {
         }
 
         try {
-            var writer = fs.createWriteStream(location);
-            request(url).pipe(writer);
+            var writer = fs.createWriteStream(location) /*nxt line*/
+                , requests = request(url).pipe(writer);
 
             if (callback) {
-                console.log(writer);
-                writer.on("finish", callback(writer));
+                writer.on("close", function () {
+                    callback(writer);
+                });
             }
         } catch (error) {
+            console.log(error);
             callback(false);
         }
     }
